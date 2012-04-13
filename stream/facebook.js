@@ -6,8 +6,8 @@ app.use(express.bodyParser());
 
 app.get('/facebook', function(request, response) {
 	
-	console.log("Challenge: "+request);
-	response.send(request);
+	console.log("Challenge: "+request.query["hub.challenge"]);
+	response.send(request.query["hub.challenge"]);
 });
 
 var port = process.env.PORT || 3000;
