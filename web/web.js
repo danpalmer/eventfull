@@ -4,6 +4,10 @@ var http = require('http');
 var app = express.createServer(express.logger());
 
 app.get('/', function (req, res) {
+	res.sendfile(__dirname + '/landing.html');
+});
+
+app.get('/event/:id', function (req, res) {
 	res.sendfile(__dirname + '/app.html');
 });
 
@@ -42,4 +46,48 @@ app.get('/fbredir', function(request, response){
 var port = process.env.PORT || 3001;
 app.listen(port, function() {
   console.log("Listening on " + port);
+});
+
+app.get('/testdata', function (req, res) {
+	res.send([
+		{
+			'user':'@danpalmer',
+			'text':'This is a test tweet full of test data...',
+			'locationText':'White Bear Yard',
+			'location': {
+				'lat':50.9238156,
+				'long':-1.391024
+			},
+			'service':'twitter',
+			'timestamp':'Fri Apr 13 22:50:31 +0000 2012',
+			'id':190932334432890880,
+			'mediaURL':'http://p.twimg.com/AqZVhfxCEAASVLN.png'
+		},
+		{
+			'user':'@danpalmer',
+			'text':'Some more test data',
+			'locationText':'White Bear Yard',
+			'location': {
+				'lat':50.9238156,
+				'long':-1.391024
+			},
+			'service':'twitter',
+			'timestamp':'Fri Apr 13 17:50:31 +0000 2012',
+			'id':190932334432890880,
+			'mediaURL':'http://p.twimg.com/AqZVhfxCEAASVLN.png'
+		},
+		{
+			'user':'dpalmer.uk',
+			'text':'Wow, this is a big station',
+			'locationText':'Waterloo',
+			'location': {
+				'lat':50.9238156,
+				'long':-1.391024
+			},
+			'service':'facebook',
+			'timestamp':'Fri Apr 13 17:20:31 +0000 2012',
+			'id':190932334432890880,
+			'checkin':true
+		},
+	]);
 });
