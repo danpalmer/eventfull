@@ -1,4 +1,6 @@
 var express = require('express');
+var querystring = require('querystring');
+var http = require('http');
 var app = express.createServer(express.logger());
 
 app.get('/', function (req, res) {
@@ -20,7 +22,20 @@ app.get('/facebook', function(request, response) {
 
 app.post('/facebook', function(request, response){
 
-    console.log(request.body);
+	console.log(request.body);
+
+});
+
+app.get('/fbredir', function(request, response){
+
+	var properties = querystring.stringify({
+		'client_id' : '302728933133564',
+		'redirect_uri': '/authfb',
+		'state': state});		
+
+	response.statusCode = 302;
+	response.setHeader("Location", "https://www.facebook.com/dialog/oauth"+properties);
+	response.end();
 
 });
 
