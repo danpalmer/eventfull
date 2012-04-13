@@ -5,6 +5,7 @@
 	"description": {
 		"express": "2.5.x",
 		"socket.io": "0.9.x",
-		"ntwitter": "0.3.x"
+		"ntwitter": "0.3.x",
+		"ampq":"0.1.x"
 	}
 }
