@@ -1,2 +1,2 @@
 web: web/web.js
-worker: node stream/facebook.js
+web: node stream/facebook.js
