@@ -18,6 +18,12 @@ app.get('/facebook', function(request, response) {
 	}
 });
 
+app.post('/facebook', function(request, response){
+
+    console.log(request.body);
+
+});
+
 var port = process.env.PORT || 3001;
 app.listen(port, function() {
   console.log("Listening on " + port);
