@@ -35,7 +35,7 @@ app.get('/fbredir', function(request, response){
 	var properties = querystring.stringify({
 		'client_id' : '302728933133564',
 		'redirect_uri': '/authfb',
-		'state': state});		
+		'state': "71862"});		
 
 	response.statusCode = 302;
 	response.setHeader("Location", "https://www.facebook.com/dialog/oauth"+properties);
