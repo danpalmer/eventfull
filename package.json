@@ -6,6 +6,6 @@
 		"express": "2.5.x",
 		"socket.io": "0.9.x",
 		"ntwitter": "0.3.x",
-		"rabbit.js" : "0.2.x"
+		"rabbit.js" : "0.2.0"
 	}
 }
