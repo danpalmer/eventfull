@@ -5,9 +5,10 @@ var app = express.createServer(express.logger());
 app.use(express.bodyParser());
 
 app.get('/facebook', function(request, response) {
-	
-	console.log("Challenge: "+request.query["hub.challenge"]);
-	response.send(request.query["hub.challenge"]);
+	if (request.query["hub.verify_token"] == "3") {
+		console.log("Challenge: "+request.query["hub.challenge"]);
+		response.send(request.query["hub.challenge"]);
+	}
 });
 
 var port = process.env.PORT || 3000;
