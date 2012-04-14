@@ -76,11 +76,12 @@ app.post('/facebook', function(request, response){
 		res.on("data", function(d) {
 			console.log("Got data.");
     			data = d;
+			response.send(data);
   		});
 	});
 
-	console.log("Received POST: "+data);
-	response.send(data);
+	//console.log("Received POST: "+data);
+	//response.send(data);
 
 	//for (var item in data.data) {
 	//	if (item.updated_time == time) {
