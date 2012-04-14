@@ -137,7 +137,10 @@ app.get('/authfb', function(request, response){
 		res.setEncoding('utf8');
 
 		res.on("data", function(d) {
-			redis.set('facebook:'+facebookID, accessToken);
+			d = d.split('=',2)[1];
+			d = d.split('&',1)[0];
+			console.log(d);
+			redis.set('facebook:'+facebookID, d);
 			response.redirect('/create#fbsuccess');
 		});
 	});
