@@ -50,10 +50,13 @@ app.get('/authfb', function(request, response){
 	var req = https.get(options, function(res) {
 		console.log('STATUS: ' + res.statusCode);
 	  	console.log('HEADERS: ' + res.headers);
-		res.on('data', function(d) {
+		res.on("data", function(d) {
     			console.log(d);
 			return;
   		});
+		res.on("end", function() {
+			return;
+		});
 	});
 	req.end();
 
