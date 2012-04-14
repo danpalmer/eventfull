@@ -110,6 +110,7 @@ function runServer(exchange, queue) {
 	  	});
 
 	  	res.on('end', function () {
+				console.log((buffer.join()).data);
 			  var data = JSON.parse(buffer.join()).data;
 				for (var index in data) {
 					if (data[index].updated_time == time) {
