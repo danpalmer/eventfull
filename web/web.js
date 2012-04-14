@@ -3,7 +3,7 @@ var querystring = require('querystring');
 var http = require('http');
 var https = require('https');
 var app = express.createServer(express.logger());
-//var redis = require("redis").createClient();
+var redis = require("redis").createClient();
 
 app.use(express.bodyParser());
 
@@ -61,7 +61,7 @@ app.post('/facebook', function(request, response){
 
 	var options = {
   	host: 'graph.facebook.com',
-	port: '443',
+		port: '443',
   	path: "/"+user+"/feed?access_token="+access_token+"&date_format=U"
 	};
 
@@ -71,14 +71,16 @@ app.post('/facebook', function(request, response){
 
 	var req = https.get(options, function(res) {
 		console.log('STATUS: ' + res.statusCode);
-	  	console.log('HEADERS: ' + res.headers);
+  	console.log('HEADERS: ' + res.headers);
   
 		res.setEncoding('utf8');
 
 		res.on("data", function(d) {
+
 			console.log("Got data: "+JSON.stringify(d));
     			data = d;
 			response.send(data);
+
   		});
 	});
 
@@ -109,13 +111,14 @@ app.get('/authfb', function(request, response){
 
 	var req = https.get(options, function(res) {
 		console.log('STATUS: ' + res.statusCode);
-	  	console.log('HEADERS: ' + res.headers);
+  	console.log('HEADERS: ' + res.headers);
 
 		res.setEncoding('utf8');
 
 		res.on("data", function(d) {
-    			response.send(d);
-  		});
+			response.send(d);
+			redis.set('facebook:'+facebookID, accessToken);
+		});
 	});
 });
 
