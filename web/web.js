@@ -179,7 +179,12 @@ function runServer(exchange, queue) {
 			  	});
 
 			  	r.on('end', function () {
+<<<<<<< HEAD
 						redis.set('facebook:'+JSON.parse(buffer.join()).id, token);
+=======
+						console.log("ID: "+JSON.parse(buffer.join()).id);
+						redis.set('facebook:'+JSON.parse(buffer.join()).id, token, redis.write);
+>>>>>>> 35d52476aafa43703d053c9d76150adc5a07dfa4
 						response.redirect('/create#fbsuccess');
 			  	});
 				});
