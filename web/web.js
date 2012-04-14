@@ -5,6 +5,7 @@ var https = require('https');
 var app = express.createServer(express.logger());
 var rtg   = require('url').parse(process.env.REDISTOGO_URL);
 var redis = require('redis').createClient(rtg.port, rtg.hostname);
+var moment = require('moment');
 
 /// Set up the RabbitMQ connection
 var amqp = require('amqp'); 
@@ -108,23 +109,25 @@ function runServer(exchange, queue) {
 	  	});
 
 	  	res.on('end', function () {
-
-				console.log("Test");
-				console.log(buffer.join());
-
-				console.log(JSON.parse(buffer.join()).data[0]);
 			  var data = JSON.parse(buffer.join()).data;
-				for (var thing in data)
-					{
-						
-						if (data[thing].updated_time == time) {
-							console.log(JSON.stringify(data[thing].place));
-							response.send(JSON.stringify(data[thing].place));
-						}
-						else {
-							console.log("LOLOLOLOL: "+data[thing].updated_time);
+				for (var index in data) {
+					if (data[index].updated_time == time) {
+						if (data[index].place) {
+							var update = {};
+							update.user = user;
+							update.username = user;
+
+							update.timestamp = moment(time).format('ddd MMM DD HH:mm:ss Z YYYY');
+							
+							update.place = data[index].name;
+							update.service = 'facebook';
+							update.coordinates = {
+								'lat':data[index].location.latitude,
+								'long':data[index].location.longitude,
+							}
 						}
 					}
+				}
 				response.send("");
 	  	});
 		});
