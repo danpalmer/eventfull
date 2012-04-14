@@ -3,8 +3,11 @@ var querystring = require('querystring');
 var http = require('http');
 var https = require('https');
 var app = express.createServer(express.logger());
-var redis = require("redis").createClient();
+var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+var redis = require("redis").createClient(rtg.port, rtg.hostname);
 
+/// Config stuff
+redis.auth(rtg.auth.split(":")[1]);
 app.use(express.bodyParser());
 
 /// Serve static files and HTML client pages
