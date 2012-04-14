@@ -179,7 +179,7 @@ function runServer(exchange, queue) {
 
 			  	r.on('end', function () {
 						console.log(buffer.join());
-						redis.set('facebook:'+(buffer.join()).id, token);
+						redis.set('facebook:'+JSON.parse(buffer.join()).id, token);
 						response.redirect('/create#fbsuccess');
 			  	});
 				});
