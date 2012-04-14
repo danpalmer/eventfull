@@ -55,6 +55,8 @@ app.post('/facebook', function(request, response){
 
 	var time = request.body.entry.time;
 
+	console.log("User: "+user+"  Time:"+time);
+
 	var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
 
 	var options = {
