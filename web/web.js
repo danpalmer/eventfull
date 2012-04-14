@@ -51,9 +51,9 @@ app.post('/facebook', function(request, response){
 
 	console.log("Received POST: "+bodystring);
 
-	var user = JSON.stringify(request.entry.uid);
+	var user = request.toJSON().entry.uid;
 
-	var time = JSON.stringify(request.entry.time);
+	var time = request.toJSON().entry.time;
 
 	console.log("User: "+user+"  Time:"+time);
 
