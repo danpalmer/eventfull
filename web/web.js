@@ -38,7 +38,7 @@ app.post('/facebook', function(request, response){
             body += data;
         });
         
-	var POST = querystring.parse(body);           
+	var POST = body.query["object"];           
 		
 	console.log("Received POST: "+POST);
 	
