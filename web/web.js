@@ -3,6 +3,8 @@ var querystring = require('querystring');
 var http = require('http');
 var app = express.createServer(express.logger());
 
+app.use(express.bodyParser());
+
 app.get('/', function (req, res) {
 	res.sendfile(__dirname + '/landing.html');
 });
