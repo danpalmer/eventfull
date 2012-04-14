@@ -129,6 +129,7 @@ function runServer(exchange, queue) {
 								'lat':data[index].place.location.latitude,
 								'long':data[index].place.location.longitude
 							};
+							exchange.publish(queue.name, {body: JSON.stringify(update)});
 						}
 					}
 				}
