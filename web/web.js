@@ -65,7 +65,7 @@ app.post('/facebook', function(request, response){
 		
 	var bodystring = JSON.stringify(request.body);
 
-	console.log("Received POST: "+bodystring);
+	//console.log("Received POST: "+bodystring);
 
 	var user = request.body.entry[0].uid;
 
@@ -82,29 +82,19 @@ app.post('/facebook', function(request, response){
   	path: "/"+user+"/feed?access_token="+access_token+"&date_format=U"
 	};
 
-	console.log("GET: https://graph.facebook.com/"+user+"/feed?access_token="+access_token+"&date_format=U");
+	//console.log("GET: https://graph.facebook.com/"+user+"/feed?access_token="+access_token+"&date_format=U");
 
 	var data;
 
 	var req = https.get(options, function(res) {
-		console.log('STATUS: ' + res.statusCode);
-  	console.log('HEADERS: ' + res.headers);
-  
 		res.setEncoding('utf8');
 
 		res.on("data", function (data) {
-
-			var dataObject = JSON.parse(data);
-			console.log(dataObject);
-			console.log("LOLOLOLOL");
-			console.log(dataObject.data);
-			console.log("LOLOLOLOL");
-			console.log(dataObject.data[0]);
-			console.log("LOLOLOLOL");
-			console.log(dataObject.data[0].id);
+			console.log("Test");
+			console.log(data);
 			// for(var j = 0; j < data.data.length; j++)
 			// {
-		 //    if (data.data[j].updated_time == time) {
+		  //   if (data.data[j].updated_time == time) {
 			// 		console.log(JSON.stringify(data.data[j].place));
 			// 		response.send(JSON.stringify(data.data[j].place));
 			// 	}
