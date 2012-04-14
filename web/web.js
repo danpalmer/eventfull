@@ -3,14 +3,16 @@ var querystring = require('querystring');
 var http = require('http');
 var https = require('https');
 var app = express.createServer(express.logger());
+var redis = require("redis").createClient();
 
 app.use(express.bodyParser());
 
+/// Serve static files and HTML client pages
 app.get('/', function (req, res) {
 	res.sendfile(__dirname + '/landing.html');
 });
 
-app.get('/event/:id', function (req, res) {
+app.get('/event', function (req, res) {
 	res.sendfile(__dirname + '/app.html');
 });
 
@@ -20,6 +22,18 @@ app.get('/create', function (req, res) {
 
 app.use('/public', express.static(__dirname + '/../public/'));
 
+/// Create events in redis
+app.post('/create', function (req, res) {
+
+});
+
+/// Get dynamic data for event
+app.get('/data/:id', function (req, res) {
+	id = req.params.id;
+	res.send("Got your request for " + id);
+});
+
+/// Facebook magic
 app.get('/facebook', function(request, response) {
 	if (request.query["hub.verify_token"] == "3") {
 		console.log("Challenge: "+request.query["hub.challenge"]);
@@ -70,6 +84,7 @@ app.listen(port, function() {
   console.log("Listening on " + port);
 });
 
+/// DEBUG: remove!
 app.get('/testdata', function (req, res) {
 	res.send([
 		{
