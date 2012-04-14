@@ -62,11 +62,13 @@ app.post('/facebook', function(request, response){
   		});
 	});
 
-	for (var item in data.data) {
-		if (item.updated_time == time) {
-			response.send(JSON.stringify(item.place));
-		}
-	}
+	response.send(data);
+
+	//for (var item in data.data) {
+	//	if (item.updated_time == time) {
+	//		response.send(JSON.stringify(item.place));
+	//	}
+	//}
 
 });
 
