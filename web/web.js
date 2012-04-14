@@ -33,7 +33,7 @@ app.get('/facebook', function(request, response) {
 
 app.post('/facebook', function(request, response){       
 		
-	console.log("Received POST: "+request.query["object"]);
+	console.log("Received POST: "+JSON.stringify(request));
 	
 	response.send("Thanks!");
 
