@@ -3,11 +3,11 @@ var querystring = require('querystring');
 var http = require('http');
 var https = require('https');
 var app = express.createServer(express.logger());
-var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-var redis = require("redis").createClient(rtg.port, rtg.hostname);
+var rtg   = require('url').parse(process.env.REDISTOGO_URL);
+var redis = require('redis').createClient(rtg.port, rtg.hostname);
 
 /// Config stuff
-redis.auth(rtg.auth.split(":")[1]);
+redis.auth(rtg.auth.split(':')[1]);
 app.use(express.bodyParser());
 
 /// Serve static files and HTML client pages
@@ -27,7 +27,20 @@ app.use('/public', express.static(__dirname + '/../public/'));
 
 /// Create events in redis
 app.post('/create', function (req, res) {
+	redis.incr('nextEventID', function (err, newID) {
 
+		redis.hmset('event:'+newID, {
+			'name':'',
+			'twitterUsername':'',
+			'startDate':1,
+			'endDate':1,
+			'hashtag':'',
+			'facebookID':''
+		}, function (err) {
+			if (err) {console.log(err)};
+		});
+
+	});
 });
 
 /// Get dynamic data for event
@@ -60,7 +73,8 @@ app.post('/facebook', function(request, response){
 
 	console.log("User: "+user+"  Time:"+time);
 
-	var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
+	//var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
+	var access_token = "";
 
 	var options = {
   	host: 'graph.facebook.com',
@@ -78,15 +92,14 @@ app.post('/facebook', function(request, response){
   
 		res.setEncoding('utf8');
 
-		res.on("data", function(d) {
+		res.on("data", function (data) {
 
-			console.log(d.data.length);
-    	data = d;
+			console.log(data);
 			for(var j = 0; j < data.data.length; j++)
 			{
 		    if (data.data[j].updated_time == time) {
-					console.log(JSON.stringify(item.place));
-					response.send(JSON.stringify(item.place));
+					console.log(JSON.stringify(data.data[j].place));
+					response.send(JSON.stringify(data.data[j].place));
 				}
 			}
   	});
