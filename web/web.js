@@ -1,5 +1,10 @@
 var express = require('express');
+var querystring = require('querystring');
+var http = require('http');
+var https = require('https');
 var app = express.createServer(express.logger());
+
+app.use(express.bodyParser());
 
 app.get('/', function (req, res) {
 	res.sendfile(__dirname + '/landing.html');
@@ -24,8 +29,37 @@ app.get('/facebook', function(request, response) {
 
 app.post('/facebook', function(request, response){
 
-    console.log(request.body);
+	console.log(request.body);
 
+});
+
+app.get('/fbredir', function(request, response){ 
+
+	response.redirect("https://www.facebook.com/dialog/oauth?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb"); 
+
+});
+
+app.get('/authfb', function(request, response){
+
+	var options = {
+  	host: 'graph.facebook.com',
+	port: '443',
+  	path: "/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"],
+	method: 'GET'
+	};
+
+	var req = https.request(options, function(res) {
+		console.log('STATUS: ' + res.statusCode);
+	  	console.log('HEADERS: ' + res.headers);
+		res.on('data', function(d) {
+    			console.log(d);
+			req.end();
+  		});
+	});
+	req.end();
+
+	//console.log("Access_token="+request.query["access_token"]);
+	//response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]);
 });
 
 var port = process.env.PORT || 3001;
