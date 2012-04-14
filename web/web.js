@@ -66,6 +66,7 @@ function runServer(exchange, queue) {
 	app.get('/data/:id', function (req, res) {
 		res.send("Hello World.");
 		redis.get('events:1:stream', function (err, data) {
+			console.log(data);
 			res.send(data);
 		});
 	});
