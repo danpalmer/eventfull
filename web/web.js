@@ -73,8 +73,8 @@ app.post('/facebook', function(request, response){
 
 	console.log("User: "+user+"  Time:"+time);
 
-	//var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
-	var access_token = "AAAETVJKFzPwBAIvFLYkqY19RYSV3Q6y0M8G1vEawBvkJcDZCzGpAJPRyrOBM7teYVBXmQ51fCwp4ZAraAvMQU6MTLek0y6DgQB5qwPoAZDZD";
+	var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
+	//var access_token = "AAAETVJKFzPwBAIvFLYkqY19RYSV3Q6y0M8G1vEawBvkJcDZCzGpAJPRyrOBM7teYVBXmQ51fCwp4ZAraAvMQU6MTLek0y6DgQB5qwPoAZDZD";
 
 	var options = {
   	host: 'graph.facebook.com',
@@ -102,6 +102,13 @@ app.post('/facebook', function(request, response){
   	res.on('end', function () {
 			console.log("Test");
 			console.log(JSON.parse(buffer.join()).data[0]);
+			for (var j = 0; j < data.length; j++)
+				{
+					if (data[j].updated_time == time) {
+						console.log(JSON.stringify(data[j].place));
+						response.send(JSON.stringify(data[j].place));
+					}
+				}
   	});
 	});
 
