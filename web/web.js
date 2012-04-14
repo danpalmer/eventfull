@@ -103,13 +103,13 @@ app.post('/facebook', function(request, response){
 		  var data = JSON.parse(buffer.join()).data;
 			for (var thing in data)
 				{
-					console.log("Thing: "+thing);
-					if (thing.updated_time == time) {
-						console.log(JSON.stringify(thing.place));
-						response.send(JSON.stringify(thing.place));
+					
+					if (data[thing].updated_time == time) {
+						console.log(JSON.stringify(data[thing].place));
+						response.send(JSON.stringify(data[thing].place));
 					}
 					else {
-						console.log("LOLOLOLOL: "+thing['updated_time']);
+						console.log("LOLOLOLOL: "+data[thing].updated_time);
 					}
 				}
 			response.send("");
