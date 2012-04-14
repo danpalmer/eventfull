@@ -39,8 +39,20 @@ app.get('/fbredir', function(request, response){
 });
 
 app.get('/authfb', function(request, response){
-	console.log("Access_token="+request.query["access_token"]);
-	response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]);
+
+	var req = http.req({
+		host: "graph.facebook.com",
+		port: 443,
+		method: "GET",
+		path: "/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"])
+	});
+
+	req.on("response", function(response){
+		console.log("Result: "+response.body);
+	});
+
+	//console.log("Access_token="+request.query["access_token"]);
+	//response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]);
 });
 
 var port = process.env.PORT || 3001;
