@@ -10,7 +10,7 @@ var credentials = {
   access_token_secret: 'hGI2bY15GWGLS9oayYNTi03lsyE7H7fnMf4dAJZEyNI'
 }
 
-function stream(exchange, queue) {
+function streamTweets(exchange, queue) {
 	t = new twitter(credentials);
 	t.stream('statuses/filter', {'track':'#ldnrealtime'}, function(stream) {
 	  stream.on('data', function (data) {
