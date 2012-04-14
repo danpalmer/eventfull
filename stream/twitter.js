@@ -12,7 +12,7 @@ var credentials = {
 
 function streamTweets(exchange, queue) {
 	t = new twitter(credentials);
-	t.stream('statuses/filter', {'track':'england'}, function(stream) {
+	t.stream('statuses/filter', {'track':'#ldnrealtime'}, function(stream) {
 	  stream.on('data', function (data) {
 	  	exchange.publish(queue.name, {body: parseTweet(data)});
 	  });
