@@ -1,3 +1,9 @@
 body {
-	font-family:'comic sans ms';
+	font-family:'helvetica neue',sans-serif;
+}
+
+#stream article {
+	background:#ddd;
+	padding:20px;
+	margin:10px auto;
 }
