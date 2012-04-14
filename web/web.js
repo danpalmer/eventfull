@@ -106,11 +106,11 @@ function runServer(exchange, queue) {
 			res.setEncoding('utf8');
 
 			res.on("data", function (data) {
+				console.log(data);
 				buffer.push(data);
 	  	});
 
 	  	res.on('end', function () {
-				console.log((buffer.join()).data);
 			  var data = JSON.parse(buffer.join()).data;
 				for (var index in data) {
 					if (data[index].updated_time == time) {
@@ -125,8 +125,8 @@ function runServer(exchange, queue) {
 							update.service = 'facebook';
 							update.coordinates = {
 								'lat':data[index].location.latitude,
-								'long':data[index].location.longitude,
-							}
+								'long':data[index].location.longitude
+							};
 						}
 					}
 				}
