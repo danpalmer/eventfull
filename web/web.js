@@ -106,7 +106,7 @@ function runServer(exchange, queue) {
 			res.setEncoding('utf8');
 
 			res.on("data", function (data) {
-				console.log(data);
+				//console.log(data);
 				buffer.push(data);
 	  	});
 
@@ -115,6 +115,8 @@ function runServer(exchange, queue) {
 				for (var index in data) {
 					if (data[index].updated_time == time) {
 						if (data[index].place) {
+							console.log("Picked one!");
+							console.log(JSON.stringify(data[index]));
 							var update = {};
 							update.user = user;
 							update.username = user;
