@@ -1,6 +1,6 @@
 function initialize() {
 	var myOptions = {
-		zoom: 16,
+		zoom: 3,
 		center: new google.maps.LatLng(51.522396055,-0.1098203659057),
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		mapTypeControl: false,
@@ -20,23 +20,23 @@ $(function(){
 	
 	function render_loop(data){
 		console.log(data);
-		// for (var i=0; i < data.length; i++) {
-		// 	console.log("boner");
-		// 	// render(data[i]);
-		// }
+		for (var i=0; i < data.length; i++) {
+			console.log("boner");
+			// render(data[i]);
+		}
 	}
 
 	// // Get test data
-	// $.getJSON({
-	// 		url:'http://eventfull.herokuapp.com/data/1',
-	// 		success:function(data){
-	// 			render_loop(data);
-	// 		},
-	// 		error:function(data){
-	// 			console.log(data);
-	// 		},
-	// 		dataType:'jsonp'
-	// });
+	$.getJSON({
+			url:'http://eventfull.herokuapp.com/data/1',
+			success:function(data){
+				render_loop(data);
+			},
+			error:function(data){
+				console.log(data);
+			},
+			dataType:'jsonp'
+	});
 	// 
 	// $.getJSON('http://eventfull.herokuapp.com/data/1');
 	
@@ -44,7 +44,7 @@ $(function(){
 	
 	// Render an entry
 	function render(entry) {
-		var heading, author, location, id, author_link;
+		var heading, author, location, id, author_link, lat, lng;
 		service = entry.body.service
 		switch (service) {
 			case "twitter":
@@ -52,7 +52,11 @@ $(function(){
 				author = entry.body.user;
 				author_link = "http://twitter.com/"+author;
 				// location = entry.body.locationText;
-				location = "Locations";
+				if (entry.body.coordinates) {
+					lat = entry.body.coordinates.coordinates[0];
+					lng = entry.body.coordinates.coordinates[1];
+				}
+				location = "Locationings"
 				// id = entry.body.id;
 				id = "9001";
 				if (entry.mediaURL) {
@@ -69,6 +73,19 @@ $(function(){
 		}
 		// Build entry article
 		$("<article id='"+service+"_"+id+"'><img class='service' src='/public/images/services/"+service+".jpg'><h1>"+heading+"</h1><p class='author'><a href='"+author_link+"'>"+author+"</a></p><p class='location'>"+location+"</p></article>").prependTo("#stream");
+		
+		if (lat && lng) {
+			console.log("LOCATION BONER");
+			var marker = new google.maps.Marker({
+			            position: new google.maps.LatLng(lng,lat),
+			            map: map,
+			            animation: google.maps.Animation.DROP,
+			            title: heading
+			        });
+		};
+		
+		
+		
 	}
 	
 	
@@ -78,6 +95,7 @@ $(function(){
 	var channel = pusher.subscribe('event_1');
 	
 	channel.bind('message', function(data) {
+		console.log("pushing...");
 	  render(data);
 	});
 	
