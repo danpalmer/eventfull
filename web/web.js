@@ -10,6 +10,29 @@ var redis = require('redis').createClient(rtg.port, rtg.hostname);
 redis.auth(rtg.auth.split(':')[1]);
 app.use(express.bodyParser());
 
+
+function getIDFromToken(token) {
+	var options = {
+  	host: 'graph.facebook.com',
+		port: '443',
+  	path: "/me/?access_token="+token
+	};
+
+	var buffer = [];
+	var req = https.get(options, function(res) {
+		res.setEncoding('utf8');
+
+		res.on("data", function (data) {
+			buffer.push(data);
+  	});
+
+  	res.on('end', function () {
+			console.log(buffer.join());
+			return (buffer.join()).id;
+  	});
+	});
+}
+
 /// Serve static files and HTML client pages
 app.get('/', function (req, res) {
 	res.sendfile(__dirname + '/landing.html');
@@ -140,7 +163,8 @@ app.get('/authfb', function(request, response){
 			d = d.split('=',2)[1];
 			d = d.split('&',1)[0];
 			console.log(d);
-			redis.set('facebook:'+facebookID, d);
+
+			redis.set('facebook:'+getIDFromToken(d), d);
 			response.redirect('/create#fbsuccess');
 		});
 	});
