@@ -9,7 +9,7 @@ var pusher = new Pusher({
   secret: 'ff3c79d99d995fb1039a'
 });
 
-var channel = 'event:1';
+var channel = 'event_1';
 var event = 'message';
 
 conn.on('ready', function () {
