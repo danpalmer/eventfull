@@ -11,8 +11,4 @@ conn.on('ready', function () {
 	  });
   });
 
-  var queue = conn.queue('activities', {}, function() {
-    exchange.publish(queue.name, {body: 'test'});
-  });
-
 });

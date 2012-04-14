@@ -53,34 +53,43 @@ app.post('/facebook', function(request, response){
 
 	var user = request.body.entry[0].uid;
 
-	var time = request.body.entry[0].time;
+	var time = JSON.stringify(request.body.entry[0].time);
+
+	console.log("User: "+user+"  Time:"+time);
 
 	var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
 
 	var options = {
   	host: 'graph.facebook.com',
 		port: '443',
-  	path: "/"+user+"feed?access_token="+access_token+"&date_format=U"
+  	path: "/"+user+"/feed?access_token="+access_token+"&date_format=U"
 	};
+
+	console.log("GET: https://graph.facebook.com/"+user+"feed?access_token="+access_token+"&date_format=U");
 
 	var data;
 
 	var req = https.get(options, function(res) {
 		console.log('STATUS: ' + res.statusCode);
-	  console.log('HEADERS: ' + res.headers);
-
+  	console.log('HEADERS: ' + res.headers);
+  
 		res.setEncoding('utf8');
 
 		res.on("data", function(d) {
-    			data = d;
-  	});
+			console.log("Got data: "+JSON.stringify(d.body));
+  			data = d;
+				response.send(data);
+  		});
 	});
 
-	for (var item in data.data) {
-		if (item.updated_time == time) {
-			response.send(JSON.stringify(item.place));
-		}
-	}
+	//console.log("Received POST: "+data);
+	//response.send(data);
+
+	//for (var item in data.data) {
+	//	if (item.updated_time == time) {
+	//		response.send(JSON.stringify(item.place));
+	//	}
+	//}
 
 });
 
@@ -100,13 +109,14 @@ app.get('/authfb', function(request, response){
 
 	var req = https.get(options, function(res) {
 		console.log('STATUS: ' + res.statusCode);
-	  	console.log('HEADERS: ' + res.headers);
+  	console.log('HEADERS: ' + res.headers);
 
 		res.setEncoding('utf8');
 
 		res.on("data", function(d) {
-    			response.send(d);
-  		});
+			response.send(d);
+			redis.set('facebook:'+facebookID, accessToken);
+		});
 	});
 });
 
