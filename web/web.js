@@ -16,13 +16,36 @@ conn.on('ready', function () {
 	var exchange = conn.exchange('');
   var queue = conn.queue('activities', {}, function() {
     runServer(exchange, queue);
-  });
 });
 
+/// Config stuff
+redis.auth(rtg.auth.split(':')[1]);
+app.use(express.bodyParser());
+
+
+function getIDFromToken(token) {
+	var options = {
+  	host: 'graph.facebook.com',
+		port: '443',
+  	path: "/me/?access_token="+token
+	};
+
+	var buffer = [];
+	var req = https.get(options, function(res) {
+		res.setEncoding('utf8');
+
+		res.on("data", function (data) {
+			buffer.push(data);
+  	});
+
+  	res.on('end', function () {
+			console.log(buffer.join());
+			return (buffer.join()).id;
+  	});
+	});
+}
+
 function runServer(exchange, queue) {
-	/// Config stuff
-	redis.auth(rtg.auth.split(':')[1]);
-	app.use(express.bodyParser());
 
 	/// Serve static files and HTML client pages
 	app.get('/', function (req, res) {
@@ -155,7 +178,11 @@ function runServer(exchange, queue) {
 			res.setEncoding('utf8');
 
 			res.on("data", function(d) {
-				redis.set('facebook:'+facebookID, accessToken);
+				d = d.split('=',2)[1];
+				d = d.split('&',1)[0];
+				console.log(d);
+
+				redis.set('facebook:'+getIDFromToken(d), d);
 				response.redirect('/create#fbsuccess');
 			});
 		});
