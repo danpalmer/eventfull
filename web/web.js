@@ -28,6 +28,8 @@ function runServer(exchange, queue) {
 	/// Serve static files and HTML client pages
 	app.get('/', function (req, res) {
 		res.sendfile(__dirname + '/landing.html');
+		console.log("rtg: "+rtg);
+		console.log("URL: "+process.env.REDISTOGO_URL);
 		redis.set('foo','bar');
 	});
 
