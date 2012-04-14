@@ -3,11 +3,11 @@ var querystring = require('querystring');
 var http = require('http');
 var https = require('https');
 var app = express.createServer(express.logger());
-var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-var redis = require("redis").createClient(rtg.port, rtg.hostname);
+var rtg   = require('url').parse(process.env.REDISTOGO_URL);
+var redis = require('redis').createClient(rtg.port, rtg.hostname);
 
 /// Config stuff
-redis.auth(rtg.auth.split(":")[1]);
+redis.auth(rtg.auth.split(':')[1]);
 app.use(express.bodyParser());
 
 /// Serve static files and HTML client pages
@@ -27,7 +27,20 @@ app.use('/public', express.static(__dirname + '/../public/'));
 
 /// Create events in redis
 app.post('/create', function (req, res) {
+	redis.incr('nextEventID', function (err, newID) {
 
+		redis.hmset('event:'+newID, {
+			'name':'',
+			'twitterUsername':'',
+			'startDate':1,
+			'endDate':1,
+			'hashtag':'',
+			'facebookID':''
+		}, function (err) {
+			if (err) {console.log(err)};
+		});
+
+	});
 });
 
 /// Get dynamic data for event
