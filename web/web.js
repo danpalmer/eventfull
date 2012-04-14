@@ -80,16 +80,15 @@ app.post('/facebook', function(request, response){
 
 		res.on("data", function(d) {
 
-			//console.log("Got data: "+JSON.stringify(d));
+			console.log(d.data.length);
     	data = d;
-			for (var item in data.data) {
-				console.log(JSON.stringify(item.place));
-				if (item.updated_time == time) {
+			for(var j = 0; j < data.data.length; j++)
+			{
+		    if (data.data[j].updated_time == time) {
 					console.log(JSON.stringify(item.place));
 					response.send(JSON.stringify(item.place));
 				}
 			}
-
   	});
 	});
 
