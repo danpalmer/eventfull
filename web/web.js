@@ -80,13 +80,13 @@ app.post('/facebook', function(request, response){
 
 		res.on("data", function(d) {
 
-			console.log(d.data.length);
-    	data = d;
+			console.log(d.body.data.length);
+    	data = d.body;
 			for(var j = 0; j < data.data.length; j++)
 			{
 		    if (data.data[j].updated_time == time) {
-					console.log(JSON.stringify(item.place));
-					response.send(JSON.stringify(item.place));
+					console.log(JSON.stringify(data.data[j].place));
+					response.send(JSON.stringify(data.data[j].place));
 				}
 			}
   	});
