@@ -27,20 +27,22 @@ app.use('/public', express.static(__dirname + '/../public/'));
 
 /// Create events in redis
 app.post('/create', function (req, res) {
-	redis.incr('nextEventID', function (err, newID) {
+	console.log(req.query);
+	console.log(req.body);
+	// redis.incr('nextEventID', function (err, newID) {
 
-		redis.hmset('event:'+newID, {
-			'name':'',
-			'twitterUsername':'',
-			'startDate':1,
-			'endDate':1,
-			'hashtag':'',
-			'facebookID':''
-		}, function (err) {
-			if (err) {console.log(err)};
-		});
+	// 	redis.hmset('event:'+newID, {
+	// 		'name':'',
+	// 		'twitterUsername':'',
+	// 		'startDate':1,
+	// 		'endDate':1,
+	// 		'hashtag':'',
+	// 		'facebookID':''
+	// 	}, function (err) {
+	// 		if (err) {console.log(err)};
+	// 	});
 
-	});
+	// });
 });
 
 /// Get dynamic data for event
@@ -90,17 +92,9 @@ app.post('/facebook', function(request, response){
 
 		res.on("data", function (data) {
 			buffer.push(data);
-			// for(var j = 0; j < data.data.length; j++)
-			// {
-		  //   if (data.data[j].updated_time == time) {
-			// 		console.log(JSON.stringify(data.data[j].place));
-			// 		response.send(JSON.stringify(data.data[j].place));
-			// 	}
-			// }
   	});
 
   	res.on('end', function () {
-			console.log("Test");
 			console.log(JSON.parse(buffer.join()).data[0]);
   	});
 	});
@@ -128,8 +122,8 @@ app.get('/authfb', function(request, response){
 		res.setEncoding('utf8');
 
 		res.on("data", function(d) {
-			response.send(d);
 			redis.set('facebook:'+facebookID, accessToken);
+			response.redirect('/create#fbsuccess');
 		});
 	});
 });
