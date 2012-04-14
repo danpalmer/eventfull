@@ -29,7 +29,7 @@ app.get('/facebook', function(request, response) {
 
 app.post('/facebook', function(request, response){
 
-	console.log(request.body);
+	console.log("Received POST: "+request.body);
 
 });
 
@@ -55,12 +55,8 @@ app.get('/authfb', function(request, response){
 
 		res.on("data", function(d) {
     			response.send(d);
-			req.connection.end();
   		});
 	});
-
-	//console.log("Access_token="+request.query["access_token"]);
-	//response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]);
 });
 
 var port = process.env.PORT || 3001;
