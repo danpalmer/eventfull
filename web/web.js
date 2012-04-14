@@ -101,6 +101,7 @@ app.post('/facebook', function(request, response){
 
   	res.on('end', function () {
 			console.log("Test");
+			console.log(buffer.join());
 			console.log(JSON.parse(buffer.join()).data[0]);
 		  var data = JSON.parse(buffer.join()).data;
 			for (var thing in data)
