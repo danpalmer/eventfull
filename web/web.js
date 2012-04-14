@@ -28,6 +28,9 @@ function runServer(exchange, queue) {
 	/// Serve static files and HTML client pages
 	app.get('/', function (req, res) {
 		res.sendfile(__dirname + '/landing.html');
+		console.log("rtg: "+JSON.stringify(rtg));
+		console.log("URL: "+process.env.REDISTOGO_URL);
+		redis.set('foo','bar');
 	});
 
 	app.get('/event', function (req, res) {
@@ -90,26 +93,20 @@ function runServer(exchange, queue) {
 
 		console.log("User: "+user+"  Time:"+time);
 
-		redis.get(user, function(error, reply) {
+		redis.get("facebook:"+user, function(error, reply) {
 			var access_token = reply.toString();	
-		});
-
-		//var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
-		//var access_token = "AAAETVJKFzPwBAIvFLYkqY19RYSV3Q6y0M8G1vEawBvkJcDZCzGpAJPRyrOBM7teYVBXmQ51fCwp4ZAraAvMQU6MTLek0y6DgQB5qwPoAZDZD";
-
-		var options = {
+			var options = {
 	  	host: 'graph.facebook.com',
 			port: '443',
 	  	path: "/"+user+"/feed?access_token="+access_token+"&date_format=U"
 		};
-
-		//console.log("GET: https://graph.facebook.com/"+user+"/feed?access_token="+access_token+"&date_format=U");
 
 		var buffer = [];
 		var req = https.get(options, function(res) {
 			res.setEncoding('utf8');
 
 			res.on("data", function (data) {
+				console.log(data);
 				buffer.push(data);
 	  	});
 
@@ -136,7 +133,7 @@ function runServer(exchange, queue) {
 				response.send("");
 	  	});
 		});
-
+		});
 	});
 
 	app.get('/fbredir', function(request, response){ 
