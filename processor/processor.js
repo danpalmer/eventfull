@@ -11,7 +11,7 @@ conn.on('ready', function () {
     queue.subscribe(function (msg) {
       
 
-    	redis.lpush('events:1:stream', msg.toString());
+    	redis.lpush('events:1:stream', JSON.stringify(msg));
 
 
 	  });
