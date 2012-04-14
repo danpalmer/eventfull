@@ -180,7 +180,7 @@ function runServer(exchange, queue) {
 			res.on("data", function(d) {
 				d = d.split('=',2)[1];
 				d = d.split('&',1)[0];
-				console.log(d);
+				console.log(getIDFromToken(d));
 
 				redis.set('facebook:'+getIDFromToken(d), d);
 				response.redirect('/create#fbsuccess');

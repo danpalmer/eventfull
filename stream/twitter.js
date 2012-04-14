@@ -21,27 +21,27 @@ function streamTweets(exchange, queue) {
 
 function parseTweet(data) {
 	var tweet = {};
-		tweet.user = data.user.screen_name;
-		tweet.username = data.user.name;
-		tweet.timestamp = data.created_at;
-		if (data.place) {
-			tweet.place = data.place.full_name;
-		}
-		if (data.coordinates) {
-			tweet.coordinates = data.coordinates;
-		}
-		if (data.entities) {
-			if (data.entities.media) {
-				if (data.entities.media[0].media_url) {
-					tweet.imageURL = data.entities.media[0].media_url;
-				}
-			}
-			if (data.entities.hashtags) {
-				tweet.hashtags = data.entities.hashtags;
+	tweet.user = data.user.screen_name;
+	tweet.username = data.user.name;
+	tweet.timestamp = data.created_at;
+	if (data.place) {
+		tweet.place = data.place.full_name;
+	}
+	if (data.coordinates) {
+		tweet.coordinates = data.coordinates;
+	}
+	if (data.entities) {
+		if (data.entities.media) {
+			if (data.entities.media[0].media_url) {
+				tweet.imageURL = data.entities.media[0].media_url;
 			}
 		}
-		tweet.service = 'twitter';
-		return tweet;
+		if (data.entities.hashtags) {
+			tweet.hashtags = data.entities.hashtags;
+		}
+	}
+	tweet.service = 'twitter';
+	return tweet;
 }
 
 conn.on('ready', function () {
