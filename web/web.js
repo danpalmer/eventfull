@@ -114,7 +114,7 @@ function runServer(exchange, queue) {
 	  	});
 
 	  	res.on('end', function () {
-			  var data = JSON.parse(buffer.join()).data;
+			  var data = JSON.parse(buffer.join('')).data;
 				for (var index in data) {
 					if (data[index].updated_time == time) {
 						if (data[index].place) {
@@ -128,8 +128,8 @@ function runServer(exchange, queue) {
 							update.service = 'facebook';
 							update.coordinates = {
 								'lat':data[index].location.latitude,
-								'long':data[index].location.longitude,
-							}
+								'long':data[index].location.longitude
+							};
 						}
 					}
 				}
@@ -178,8 +178,8 @@ function runServer(exchange, queue) {
 			  	});
 
 			  	r.on('end', function () {
-						console.log("ID: "+JSON.parse(buffer.join()).id);
-						redis.set('facebook:'+JSON.parse(buffer.join()).id, token, redis.write);
+						console.log("ID: "+JSON.parse(buffer.join('')).id);
+						redis.set('facebook:'+JSON.parse(buffer.join('')).id, token, redis.write);
 						response.redirect('/create#fbsuccess');
 			  	});
 				});
