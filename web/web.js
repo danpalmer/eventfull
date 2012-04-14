@@ -102,11 +102,12 @@ app.post('/facebook', function(request, response){
   	res.on('end', function () {
 			console.log("Test");
 			console.log(JSON.parse(buffer.join()).data[0]);
-			for (var j = 0; j < data.length; j++)
+		  var data = JSON.parse(buffer.join()).data;
+			for (var thing in data)
 				{
-					if (data[j].updated_time == time) {
-						console.log(JSON.stringify(data[j].place));
-						response.send(JSON.stringify(data[j].place));
+					if (thing.updated_time == time) {
+						console.log(JSON.stringify(thing.place));
+						response.send(JSON.stringify(thing.place));
 					}
 				}
   	});
