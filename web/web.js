@@ -44,7 +44,7 @@ app.get('/authfb', function(request, response){
 	var options = {
   	host: 'graph.facebook.com',
 	port: '443',
-  	path: "/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]
+  	path: "/oauth/access_token?client_id=302728933133564&redirect_uri=http:%2F%2Feventfull.herokuapp.com%2Fauthfb&client_secret=8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]
 	};
 
 	var req = https.get(options, function(res) {
@@ -54,9 +54,6 @@ app.get('/authfb', function(request, response){
     			console.log(d);
 			return;
   		});
-		res.on("end", function() {
-			return;
-		});
 	});
 	req.end();
 
