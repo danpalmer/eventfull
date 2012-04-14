@@ -12,6 +12,7 @@ var amqp = require('amqp');
 var rabbitURL = process.env.CLOUDAMQP_URL || "amqp://localhost";
 var conn = amqp.createConnection({url: rabbitURL});
 
+/// Establish connection to MQ
 conn.on('ready', function () {
 	var exchange = conn.exchange('');
   var queue = conn.queue('activities', {}, function() {
@@ -23,14 +24,12 @@ conn.on('ready', function () {
 redis.auth(rtg.auth.split(':')[1]);
 app.use(express.bodyParser());
 
+/// Run the MQ-enabled server
 function runServer(exchange, queue) {
 
 	/// Serve static files and HTML client pages
 	app.get('/', function (req, res) {
 		res.sendfile(__dirname + '/landing.html');
-		console.log("rtg: "+JSON.stringify(rtg));
-		console.log("URL: "+process.env.REDISTOGO_URL);
-		redis.set('foo','bar');
 	});
 
 	app.get('/event', function (req, res) {
@@ -72,12 +71,10 @@ function runServer(exchange, queue) {
 	/// Facebook magic
 	app.get('/facebook', function(request, response) {
 		if (request.query["hub.verify_token"] == "3") {
-			console.log("Challenge: "+request.query["hub.challenge"]);
 			response.send(request.query["hub.challenge"]);
 		}
 		else {
-			console.log("Someone shouldn't be heeere!");
-			response.send("Go away!");
+			response.redirect('/');
 		}
 	});
 
@@ -85,13 +82,9 @@ function runServer(exchange, queue) {
 			
 		var bodystring = JSON.stringify(request.body);
 
-		//console.log("Received POST: "+bodystring);
-
 		var user = request.body.entry[0].uid;
 
 		var time = JSON.stringify(request.body.entry[0].time);
-
-		console.log("User: "+user+"  Time:"+time);
 
 		redis.get("facebook:"+user, function(error, reply) {
 			var access_token = reply.toString();	
@@ -106,7 +99,6 @@ function runServer(exchange, queue) {
 			res.setEncoding('utf8');
 
 			res.on("data", function (data) {
-				//console.log(data);
 				buffer.push(data);
 	  	});
 
@@ -115,8 +107,6 @@ function runServer(exchange, queue) {
 				for (var index in data) {
 					if (data[index].updated_time == time) {
 						if (data[index].place) {
-							console.log("Picked one!");
-							console.log(JSON.stringify(data[index]));
 							var update = {};
 							update.user = user;
 							update.username = user;
@@ -177,7 +167,6 @@ function runServer(exchange, queue) {
 			  	});
 
 			  	r.on('end', function () {
-						console.log("ID: "+JSON.parse(buffer.join('')).id);
 						redis.set('facebook:'+JSON.parse(buffer.join('')).id, token, redis.write);
 						response.redirect('/create#fbsuccess');
 			  	});
@@ -192,48 +181,4 @@ function runServer(exchange, queue) {
 	  console.log("Listening on " + port);
 	});
 
-	/// DEBUG: remove!
-	app.get('/testdata', function (req, res) {
-		res.send([
-			{
-				'user':'dpalmer.uk',
-				'text':'Wow, this is a big station',
-				'locationText':'Waterloo',
-				'location': {
-					'lat':50.9238156,
-					'long':-1.391024
-				},
-				'service':'facebook',
-				'timestamp':'Fri Apr 13 17:20:31 +0000 2012',
-				'id':190932334432890880,
-				'checkin':true
-			},
-			{
-				'user':'@danpalmer',
-				'text':'Some more test data',
-				'locationText':'White Bear Yard',
-				'location': {
-					'lat':50.9238156,
-					'long':-1.391024
-				},
-				'service':'twitter',
-				'timestamp':'Fri Apr 13 17:50:31 +0000 2012',
-				'id':190932334432890880,
-				'mediaURL':'http://p.twimg.com/AqZVhfxCEAASVLN.png'
-			},
-			{
-				'user':'@danpalmer',
-				'text':'This is a test tweet full of test data...',
-				'locationText':'White Bear Yard',
-				'location': {
-					'lat':50.9238156,
-					'long':-1.391024
-				},
-				'service':'twitter',
-				'timestamp':'Fri Apr 13 22:50:31 +0000 2012',
-				'id':190932334432890880,
-				'mediaURL':'http://p.twimg.com/AqZVhfxCEAASVLN.png'
-			}
-		]);
-	});
 }
