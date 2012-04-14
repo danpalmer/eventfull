@@ -94,7 +94,14 @@ app.post('/facebook', function(request, response){
 
 		res.on("data", function (data) {
 
-			console.log(data[0].id);
+			var dataObject = JSON.parse(data);
+			console.log(dataObject);
+			console.log("LOLOLOLOL");
+			console.log(dataObject.data);
+			console.log("LOLOLOLOL");
+			console.log(dataObject.data[0]);
+			console.log("LOLOLOLOL");
+			console.log(dataObject.data[0].id);
 			// for(var j = 0; j < data.data.length; j++)
 			// {
 		 //    if (data.data[j].updated_time == time) {
