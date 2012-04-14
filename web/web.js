@@ -25,6 +25,10 @@ app.get('/facebook', function(request, response) {
 		console.log("Challenge: "+request.query["hub.challenge"]);
 		response.send(request.query["hub.challenge"]);
 	}
+	else {
+		console.log("Someone shouldn't be heeere!");
+		response.send("Go away!");
+	}
 });
 
 app.post('/facebook', function(request, response){
