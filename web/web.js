@@ -28,7 +28,7 @@ function runServer(exchange, queue) {
 	/// Serve static files and HTML client pages
 	app.get('/', function (req, res) {
 		res.sendfile(__dirname + '/landing.html');
-		redis.add('foo','bar');
+		redis.set('foo','bar');
 	});
 
 	app.get('/event', function (req, res) {
