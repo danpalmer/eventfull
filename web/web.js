@@ -28,6 +28,7 @@ function runServer(exchange, queue) {
 	/// Serve static files and HTML client pages
 	app.get('/', function (req, res) {
 		res.sendfile(__dirname + '/landing.html');
+		redis.add('foo','bar');
 	});
 
 	app.get('/event', function (req, res) {
@@ -178,7 +179,6 @@ function runServer(exchange, queue) {
 			  	});
 
 			  	r.on('end', function () {
-						console.log("ID: "+JSON.parse(buffer.join()).id);
 						redis.set('facebook:'+JSON.parse(buffer.join()).id, token);
 						response.redirect('/create#fbsuccess');
 			  	});
