@@ -33,6 +33,7 @@ function runServer(exchange, queue) {
 		redis.set('foo','bar');
 		redis.get('foo', function (r, e) {
 			console.log(r.toString());
+		});
 	});
 
 	app.get('/event', function (req, res) {
