@@ -18,24 +18,43 @@ function initialize() {
 
 $(function(){
 	
-	// Get test data
-	$.get('http://eventfull.herokuapp.com/data/1',function(data){
-		for (var i=0; i < data.length; i++) {
-			render(data[i]);
-		};
-	})
+	function render_loop(data){
+		console.log(data);
+		// for (var i=0; i < data.length; i++) {
+		// 	console.log("boner");
+		// 	// render(data[i]);
+		// }
+	}
+
+	// // Get test data
+	// $.getJSON({
+	// 		url:'http://eventfull.herokuapp.com/data/1',
+	// 		success:function(data){
+	// 			render_loop(data);
+	// 		},
+	// 		error:function(data){
+	// 			console.log(data);
+	// 		},
+	// 		dataType:'jsonp'
+	// });
+	// 
+	// $.getJSON('http://eventfull.herokuapp.com/data/1');
+	
+	
 	
 	// Render an entry
 	function render(entry) {
-		var heading, author, location
-		service = entry.service
+		var heading, author, location, id, author_link;
+		service = entry.body.service
 		switch (service) {
 			case "twitter":
-				heading = entry.text;
-				author = entry.user;
+				heading = entry.body.text;
+				author = entry.body.user;
 				author_link = "http://twitter.com/"+author;
-				location = entry.locationText;
-				id = entry.id;
+				// location = entry.body.locationText;
+				location = "Locations";
+				// id = entry.body.id;
+				id = "9001";
 				if (entry.mediaURL) {
 					media = entry.mediaURL;
 				}
@@ -51,6 +70,19 @@ $(function(){
 		// Build entry article
 		$("<article id='"+service+"_"+id+"'><img class='service' src='/public/images/services/"+service+".jpg'><h1>"+heading+"</h1><p class='author'><a href='"+author_link+"'>"+author+"</a></p><p class='location'>"+location+"</p></article>").prependTo("#stream");
 	}
+	
+	
+	// Pusher innit
+	
+	var pusher = new Pusher('adc860e9e73f74fd5124'); // Replace with your app key
+	var channel = pusher.subscribe('event_1');
+	
+	channel.bind('message', function(data) {
+	  render(data);
+	});
+	
+	
+	
 	
 	// Maps stuff
 	
