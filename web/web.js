@@ -116,9 +116,10 @@ function runServer(exchange, queue) {
 							update.place = data[index].name;
 							update.service = 'facebook';
 							update.coordinates = {
-								'lat':data[index].location.latitude,
-								'long':data[index].location.longitude
+								'lat':data[index].place.location.latitude,
+								'long':data[index].place.location.longitude
 							};
+							exchange.publish(queue.name, {body: JSON.stringify(update)});
 						}
 					}
 				}
