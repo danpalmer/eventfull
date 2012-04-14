@@ -51,7 +51,8 @@ app.get('/authfb', function(request, response){
 		console.log('STATUS: ' + res.statusCode);
 	  	console.log('HEADERS: ' + res.headers);
 		res.on('data', function(d) {
-    			console.log(d.body);
+    			console.log(d);
+			return;
   		});
 	});
 	req.end();
