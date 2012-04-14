@@ -16,6 +16,7 @@ conn.on('ready', function () {
 	var exchange = conn.exchange('');
   var queue = conn.queue('activities', {}, function() {
     runServer(exchange, queue);
+  });
 });
 
 /// Config stuff
@@ -158,16 +159,14 @@ function runServer(exchange, queue) {
 	});
 
 	app.get('/fbredir', function(request, response){ 
-
 		response.redirect("https://www.facebook.com/dialog/oauth?client_id=302728933133564&redirect_uri=http:%2F%2Feventfull.herokuapp.com%2Fauthfb&scope=user_status,user_checkins,read_stream&state=magicalstatecode"); 
-
 	});
 
 	app.get('/authfb', function(request, response){
 
 		var options = {
 	  	host: 'graph.facebook.com',
-		port: '443',
+			port: '443',
 	  	path: "/oauth/access_token?client_id=302728933133564&redirect_uri=http:%2F%2Feventfull.herokuapp.com%2Fauthfb&client_secret=8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]
 		};
 
@@ -185,7 +184,9 @@ function runServer(exchange, queue) {
 				redis.set('facebook:'+getIDFromToken(d), d);
 				response.redirect('/create#fbsuccess');
 			});
+
 		});
+
 	});
 
 	var port = process.env.PORT || 3001;
