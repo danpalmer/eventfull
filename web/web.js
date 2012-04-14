@@ -1,6 +1,7 @@
 var express = require('express');
 var querystring = require('querystring');
 var http = require('http');
+var https = require('https');
 var app = express.createServer(express.logger());
 
 app.use(express.bodyParser());
@@ -43,10 +44,11 @@ app.get('/authfb', function(request, response){
 	var options = {
   	host: 'graph.facebook.com',
 	port: '443',
-  	path: "/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]
+  	path: "/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"],
+	method: 'GET'
 	};
 
-	http.get(options, function(res) {
+	https.request(options, function(res) {
 		console.log('STATUS: ' + res.statusCode);
 	  	console.log('HEADERS: ' + JSON.stringify(res.headers));
 	});
