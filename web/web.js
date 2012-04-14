@@ -92,14 +92,18 @@ app.post('/facebook', function(request, response){
   
 		res.setEncoding('utf8');
 
+		var buffer = []
 		res.on("data", function (data) {
+			buffer.push(data);
+  	});
 
-			console.log(data);
-			for(var j = 0; j < data.data.length; j++)
+  	res.on('end', function () {
+  		console.log(buffer);
+			for(var j = 0; j < buffer.data.length; j++)
 			{
-		    if (data.data[j].updated_time == time) {
-					console.log(JSON.stringify(data.data[j].place));
-					response.send(JSON.stringify(data.data[j].place));
+		    if (buffer.data[j].updated_time == time) {
+					console.log(JSON.stringify(buffer.data[j].place));
+					response.send(JSON.stringify(buffer.data[j].place));
 				}
 			}
   	});
