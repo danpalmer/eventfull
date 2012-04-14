@@ -84,14 +84,12 @@ app.post('/facebook', function(request, response){
 
 	//console.log("GET: https://graph.facebook.com/"+user+"/feed?access_token="+access_token+"&date_format=U");
 
-	var data;
-
+	var buffer = [];
 	var req = https.get(options, function(res) {
 		res.setEncoding('utf8');
 
 		res.on("data", function (data) {
-			console.log("Test");
-			console.log(data.data);
+			buffer.push(data);
 			// for(var j = 0; j < data.data.length; j++)
 			// {
 		  //   if (data.data[j].updated_time == time) {
@@ -99,6 +97,11 @@ app.post('/facebook', function(request, response){
 			// 		response.send(JSON.stringify(data.data[j].place));
 			// 	}
 			// }
+  	});
+
+  	res.on('end', function () {
+			console.log("Test");
+			console.log(buffer.data);
   	});
 	});
 
