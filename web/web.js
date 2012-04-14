@@ -37,9 +37,9 @@ app.post('/facebook', function(request, response){
 
 	console.log("Received POST: "+bodystring);
 
-	var user = bodystring.entry.uid;
+	var user = request.body.entry.uid;
 
-	var time = bodystring.entry.time;
+	var time = request.body.entry.time;
 
 	var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
 
