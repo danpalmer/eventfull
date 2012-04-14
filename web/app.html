@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Eventfull</title>
+		<title>Eventfull - Create an event stream</title>
 		<link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII=" rel="icon" type="image/x-icon" />
 		<link rel="stylesheet" href="../public/css/style.css">
 		<script src="../public/js/jquery-1.7.2.min.js"></script>
@@ -11,30 +11,13 @@
 	<body>
 		<header>
 			<h1>Eventfull</h1>
-			<h2>London Real Time</h2>
+			<h2>Create an event stream</h2>
 		</header>
-		<section id="create">
-			<form method="post" action="/create">
-				<div class="event">
-					<label for="even_name">Event Name</label>
-					<input type="text" name="event[name]" id="event_name">
-				
-					<label for="start_date">Start Date</label>
-					<input type="date" name="event[start_date]" id="start_date">
-				
-					<label for="end_date">End Date</label>
-					<input type="date" name="event[end_date]" id="end_date">
-				</div>
-				<div class="twitter">
-					<label for="twitter_username">Twitter Username</label>
-					<input type="text" name="twitter[username]" id="twitter_username">
-					
-					<label for="twitter_hashtag">Twitter Hashtag</label>
-					<input type="text" name="twitter[hashtag]" id="twitter_hashtag">
-				</div>
-				
-				<input type="submit">
-			</form>
+		<section class="map">
+			<div id="map"></div>
+		</section>
+		<section id="stream">
+			
 		</section>
 	</body>
 </html>
