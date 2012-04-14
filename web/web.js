@@ -101,7 +101,7 @@ app.post('/facebook', function(request, response){
 
   	res.on('end', function () {
 			console.log("Test");
-			console.log(buffer.data);
+			console.log(buffer.join());
   	});
 	});
 
