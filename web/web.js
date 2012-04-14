@@ -40,8 +40,8 @@ function getIDFromToken(token) {
   	});
 
   	res.on('end', function () {
-			console.log(buffer.join());
-			return (buffer.join()).id;
+			console.log(JSON.parse(buffer.join()));
+			return JSON.parse(buffer.join()).id;
   	});
 	});
 }
