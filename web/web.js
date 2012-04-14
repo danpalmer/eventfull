@@ -84,6 +84,7 @@ app.post('/facebook', function(request, response){
     	data = d;
 			for (var item in data.data) {
 				if (item.updated_time == time) {
+					console.log(JSON.stringify(item.place));
 					response.send(JSON.stringify(item.place));
 				}
 			}
