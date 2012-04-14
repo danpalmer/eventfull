@@ -23,11 +23,6 @@ conn.on('ready', function () {
 redis.auth(rtg.auth.split(':')[1]);
 app.use(express.bodyParser());
 
-
-function getIDFromToken(token) {
-	
-}
-
 function runServer(exchange, queue) {
 
 	/// Serve static files and HTML client pages
@@ -95,7 +90,11 @@ function runServer(exchange, queue) {
 
 		console.log("User: "+user+"  Time:"+time);
 
-		var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
+		redis.get(user, function(error, reply) {
+			var access_token = reply.toString();	
+		}
+
+		//var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
 		//var access_token = "AAAETVJKFzPwBAIvFLYkqY19RYSV3Q6y0M8G1vEawBvkJcDZCzGpAJPRyrOBM7teYVBXmQ51fCwp4ZAraAvMQU6MTLek0y6DgQB5qwPoAZDZD";
 
 		var options = {
@@ -160,21 +159,21 @@ function runServer(exchange, queue) {
 
 			res.on("data", function(d) {
 
-				var options = {
+				var optionsIDRequest = {
 			  	host: 'graph.facebook.com',
 					port: '443',
 			  	path: "/me/?access_token="+token
 				};
 
 				var buffer = [];
-				var req = https.get(options, function(res) {
-					res.setEncoding('utf8');
-
-					res.on("data", function (data) {
+				var req = https.get(optionsIDRequest, function(r) {
+					r.setEncoding('utf8');
+					
+					r.on("data", function (data) {
 						buffer.push(data);
 			  	});
 
-			  	res.on('end', function () {
+			  	r.on('end', function () {
 						console.log(buffer.join());
 						return (buffer.join()).id;
 						d = d.split('=',2)[1];
