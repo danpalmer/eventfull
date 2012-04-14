@@ -3,7 +3,7 @@ var querystring = require('querystring');
 var http = require('http');
 var https = require('https');
 var app = express.createServer(express.logger());
-var redis = require("redis").createClient();
+//var redis = require("redis").createClient();
 
 app.use(express.bodyParser());
 
