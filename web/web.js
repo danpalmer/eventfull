@@ -25,25 +25,7 @@ app.use(express.bodyParser());
 
 
 function getIDFromToken(token) {
-	var options = {
-  	host: 'graph.facebook.com',
-		port: '443',
-  	path: "/me/?access_token="+token
-	};
-
-	var buffer = [];
-	var req = https.get(options, function(res) {
-		res.setEncoding('utf8');
-
-		res.on("data", function (data) {
-			buffer.push(data);
-  	});
-
-  	res.on('end', function () {
-			console.log(buffer.join());
-			return (buffer.join()).id;
-  	});
-	});
+	
 }
 
 function runServer(exchange, queue) {
@@ -177,14 +159,33 @@ function runServer(exchange, queue) {
 			res.setEncoding('utf8');
 
 			res.on("data", function(d) {
-				d = d.split('=',2)[1];
-				d = d.split('&',1)[0];
-				console.log(getIDFromToken(d));
 
-				redis.set('facebook:'+getIDFromToken(d), d);
-				response.redirect('/create#fbsuccess');
+				var options = {
+			  	host: 'graph.facebook.com',
+					port: '443',
+			  	path: "/me/?access_token="+token
+				};
+
+				var buffer = [];
+				var req = https.get(options, function(res) {
+					res.setEncoding('utf8');
+
+					res.on("data", function (data) {
+						buffer.push(data);
+			  	});
+
+			  	res.on('end', function () {
+						console.log(buffer.join());
+						return (buffer.join()).id;
+						d = d.split('=',2)[1];
+						d = d.split('&',1)[0];
+						console.log(getIDFromToken(d));
+
+						redis.set('facebook:'+(buffer.join()).id, d);
+						response.redirect('/create#fbsuccess');
+			  	});
+				});
 			});
-
 		});
 
 	});
