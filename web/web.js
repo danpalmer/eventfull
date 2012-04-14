@@ -4,7 +4,7 @@ var http = require('http');
 var https = require('https');
 var app = express.createServer(express.logger());
 var rtg   = require('url').parse(process.env.REDISTOGO_URL);
-var redis = require('redis').createClient();
+var redis = require('redis').createClient(rtg.port, rtg.hostname);
 var moment = require('moment');
 
 /// Set up the RabbitMQ connection
