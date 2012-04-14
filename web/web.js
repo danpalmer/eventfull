@@ -31,9 +31,7 @@ function runServer(exchange, queue) {
 		console.log("rtg: "+JSON.stringify(rtg));
 		console.log("URL: "+process.env.REDISTOGO_URL);
 		redis.set('foo','bar');
-		redis.get('foo', function (r, e) {
-			console.log(r.toString());
-		});
+		redis.print();
 	});
 
 	app.get('/event', function (req, res) {
