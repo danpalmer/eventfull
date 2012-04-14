@@ -4,7 +4,8 @@ function initialize() {
 		center: new google.maps.LatLng(51.522396055,-0.1098203659057),
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		mapTypeControl: false,
-		streetViewControl: false
+		streetViewControl: false,
+		zoomControl: false
 	};
 
 	map = new google.maps.Map(document.getElementById('map'), myOptions);
@@ -18,11 +19,11 @@ function initialize() {
 $(function(){
 	
 	// Get test data
-	// $.get('/testdata',function(data){
-	// 	for (var i=0; i < data.length; i++) {
-	// 		render(data[i]);
-	// 	};
-	// })
+	$.get('http://eventfull.herokuapp.com/testdata',function(data){
+		for (var i=0; i < data.length; i++) {
+			render(data[i]);
+		};
+	})
 	
 	// Render an entry
 	function render(entry) {
@@ -34,6 +35,7 @@ $(function(){
 				author = entry.user;
 				author_link = "http://twitter.com/"+author;
 				location = entry.locationText;
+				id = entry.id;
 				if (entry.mediaURL) {
 					media = entry.mediaURL;
 				}
@@ -43,9 +45,11 @@ $(function(){
 				author = entry.user;
 				author_link = "http://facebook.com/"+author;
 				location = entry.locationText;
+				id = entry.id;
 				break;
 		}
-		$("<article><img class='service' src='/public/images/services/"+service+".jpg'><h1>"+heading+"</h1><p class='author'><a href='"+author_link+"'>"+author+"</a></p><p class='location'>"+location+"</p></article>").prependTo("#stream");
+		// Build entry article
+		$("<article id='"+service+"_"+id+"'><img class='service' src='/public/images/services/"+service+".jpg'><h1>"+heading+"</h1><p class='author'><a href='"+author_link+"'>"+author+"</a></p><p class='location'>"+location+"</p></article>").prependTo("#stream");
 	}
 	
 	// Maps stuff
