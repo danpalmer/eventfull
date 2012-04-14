@@ -33,7 +33,7 @@ app.get('/facebook', function(request, response) {
 
 app.post('/facebook', function(request, response){       
 		
-	var bodystring = JSON.stringify(request.body));
+	var bodystring = JSON.stringify(request.body);
 
 	console.log("Received POST: "+bodystring);
 
