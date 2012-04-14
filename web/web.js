@@ -76,7 +76,7 @@ app.post('/facebook', function(request, response){
   		});
 	});
 
-	console.log("Received POST: "+JSON.stringify(data));
+	console.log("Received POST: "+JSON.stringify(data.body));
 	response.send(data);
 
 	//for (var item in data.data) {
