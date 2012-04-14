@@ -162,7 +162,7 @@ function runServer(exchange, queue) {
 				var optionsIDRequest = {
 			  	host: 'graph.facebook.com',
 					port: '443',
-			  	path: "/me/?access_token="+token
+			  	path: "/me/?access_token="+d
 				};
 
 				var buffer = [];
