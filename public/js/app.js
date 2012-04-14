@@ -19,7 +19,7 @@ function initialize() {
 $(function(){
 	
 	// Get test data
-	$.get('http://eventfull.herokuapp.com/testdata',function(data){
+	$.get('http://eventfull.herokuapp.com/data/1',function(data){
 		for (var i=0; i < data.length; i++) {
 			render(data[i]);
 		};
