@@ -20,23 +20,23 @@ $(function(){
 	
 	function render_loop(data){
 		console.log(data);
-		// for (var i=0; i < data.length; i++) {
-		// 	console.log("boner");
-		// 	// render(data[i]);
-		// }
+		for (var i=0; i < data.length; i++) {
+			console.log("boner");
+			// render(data[i]);
+		}
 	}
 
 	// // Get test data
-	// $.getJSON({
-	// 		url:'http://eventfull.herokuapp.com/data/1',
-	// 		success:function(data){
-	// 			render_loop(data);
-	// 		},
-	// 		error:function(data){
-	// 			console.log(data);
-	// 		},
-	// 		dataType:'jsonp'
-	// });
+	$.getJSON({
+			url:'http://eventfull.herokuapp.com/data/1',
+			success:function(data){
+				render_loop(data);
+			},
+			error:function(data){
+				console.log(data);
+			},
+			dataType:'jsonp'
+	});
 	// 
 	// $.getJSON('http://eventfull.herokuapp.com/data/1');
 	
