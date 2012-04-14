@@ -68,7 +68,7 @@ app.post('/facebook', function(request, response){
 	var req = https.get(options, function(res) {
 		console.log('STATUS: ' + res.statusCode);
 	  	console.log('HEADERS: ' + res.headers);
-
+  
 		res.setEncoding('utf8');
 
 		res.on("data", function(d) {
@@ -76,6 +76,7 @@ app.post('/facebook', function(request, response){
   		});
 	});
 
+	console.log("Received POST: "+JSON.stringify(data));
 	response.send(data);
 
 	//for (var item in data.data) {
