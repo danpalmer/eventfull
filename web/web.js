@@ -73,7 +73,8 @@ app.post('/facebook', function(request, response){
 
 	console.log("User: "+user+"  Time:"+time);
 
-	var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
+	//var access_token = "AAAETVJKFzPwBAHVv7JfJivQS2spi99cByVZABgZCl877EEZBh0rgSgdoPqzFGbRnge0u500QYqyV0bQ9HiCrL4kwgPWrXxbuRSmgiWkYAZDZD";
+	var access_token = "";
 
 	var options = {
   	host: 'graph.facebook.com',
@@ -91,10 +92,9 @@ app.post('/facebook', function(request, response){
   
 		res.setEncoding('utf8');
 
-		res.on("data", function(d) {
+		res.on("data", function (data) {
 
-			console.log(d.body.data.length);
-    	data = d.body;
+			console.log(data);
 			for(var j = 0; j < data.data.length; j++)
 			{
 		    if (data.data[j].updated_time == time) {
