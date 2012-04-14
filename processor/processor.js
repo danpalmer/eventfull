@@ -1,10 +1,17 @@
-var rabbitURL = process.env.RABBITMQ_URL || 'amqp://localhost';
-var context = require('rabbit.js').createContext(rabbitURL);
+var amqp = require('amqp'); 
 
-var sub = context.socket('SUB');
-sub.connect('activities');
-sub.setEncoding('utf8');
+function pub_and_sub() {
+  var exchange = conn.exchange(''); // get the default exchange
+  var queue = conn.queue('queue1', {}, function() { // create a queue
+    queue.subscribe(function(msg) { // subscribe to that queue
+      console.log(msg.body); // print new messages to the console
+    });
 
-sub.on('data', function (note) {
-	console.log("Alarum! " + note);
-});
+    // publish a message
+    exchange.publish(queue.name, {body: 'Hello CloudAMQP!'}); 
+  });
+}
+
+var url = process.env.CLOUDAMQP_URL || "amqp://localhost"; // default to localhost
+var conn = amqp.createConnection({url: url}); // create the connection
+conn.on('ready', pub_and_sub);
