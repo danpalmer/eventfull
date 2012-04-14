@@ -55,6 +55,7 @@ app.get('/authfb', function(request, response){
 
 		res.on("data", function(d) {
     			console.log(d);
+			d.destroy();
   		});
 	});
 
