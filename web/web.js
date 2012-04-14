@@ -37,18 +37,7 @@ app.get('/fbredir', function(request, response){
 });
 
 app.get('/authfb', function(request, response){
-	var client = http.createClient(443, 'graph.facebook.com');
-	var request = client.request("GET", '/oauth/access_token?client_id=302728933133564&redirect_uri=fbtoken&client_secret=8e6de101cc0516b6dd4ebbfea3f11818&code='+request.query["code"], {
-		"Host":"graph.facebook.com"
-	});
-
-	request.on('response', function(response) {
-		response.on('access_token', function(token) {
-			console.log(token);
-		});
-	});
-
-	request.end();
+	response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/fbtoken&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+response.query["code"]);
 });
 
 var port = process.env.PORT || 3001;
