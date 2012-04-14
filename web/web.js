@@ -36,7 +36,7 @@ app.post('/facebook', function(request, response){
 
 app.get('/fbredir', function(request, response){ 
 
-	response.redirect("https://www.facebook.com/dialog/oauth?client_id=302728933133564&redirect_uri=http:%2F%2Feventfull.herokuapp.com%2Fauthfb&scope=user_status&state=magicalstatecode"); 
+	response.redirect("https://www.facebook.com/dialog/oauth?client_id=302728933133564&redirect_uri=http:%2F%2Feventfull.herokuapp.com%2Fauthfb&scope=user_status,user_checkins&state=magicalstatecode"); 
 
 });
 
