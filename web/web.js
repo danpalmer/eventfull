@@ -51,7 +51,7 @@ app.post('/facebook', function(request, response){
 
 	console.log("Received POST: "+bodystring);
 
-	var user = JSON.stringify(request.body.entry[0].uid);
+	var user = request.body.entry[0].uid;
 
 	var time = JSON.stringify(request.body.entry[0].time);
 
@@ -62,7 +62,7 @@ app.post('/facebook', function(request, response){
 	var options = {
   	host: 'graph.facebook.com',
 	port: '443',
-  	path: "/"+user+"feed?access_token="+access_token+"&date_format=U"
+  	path: "/"+user+"/feed?access_token="+access_token+"&date_format=U"
 	};
 
 	console.log("GET: https://graph.facebook.com/"+user+"feed?access_token="+access_token+"&date_format=U");
