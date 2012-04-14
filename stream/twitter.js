@@ -1,3 +1,6 @@
+var amqp = require('amqp'); 
+var rabbitURL = process.env.CLOUDAMQP_URL || "amqp://localhost";
+var conn = amqp.createConnection({url: rabbitURL});
 var twitter = require('ntwitter');
 
 var credentials = {
@@ -7,11 +10,17 @@ var credentials = {
   access_token_secret: 'hGI2bY15GWGLS9oayYNTi03lsyE7H7fnMf4dAJZEyNI'
 }
 
-t = new twitter(credentials);
-t.stream('statuses/filter', {'track':'#ldnrealtime'}, function(stream) {
-  stream.on('data', function (data) {
-    
-  	var tweet = {};
+function stream(exchange, queue) {
+	t = new twitter(credentials);
+	t.stream('statuses/filter', {'track':'#ldnrealtime'}, function(stream) {
+	  stream.on('data', function (data) {
+	  	exchange.publish(queue.name, {body: JSON.stringify(parseTweet(data))});
+	  });
+	});
+}
+
+function parseTweet(data) {
+	var tweet = {};
 		tweet.user = data.user.screen_name;
 		tweet.username = data.user.name;
 		tweet.timestamp = data.created_at;
@@ -32,9 +41,12 @@ t.stream('statuses/filter', {'track':'#ldnrealtime'}, function(stream) {
 			}
 		}
 		tweet.service = 'twitter';
+		return tweet;
+}
 
-		console.log(tweet);
-
-
+conn.on('ready', function () {
+	var exchange = conn.exchange('');
+  var queue = conn.queue('activities', {}, function() {
+    streamTweets(exchange, queue);
   });
 });
