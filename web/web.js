@@ -25,18 +25,23 @@ app.get('/facebook', function(request, response) {
 		console.log("Challenge: "+request.query["hub.challenge"]);
 		response.send(request.query["hub.challenge"]);
 	}
+	else {
+		console.log("Someone shouldn't be heeere!");
+		response.send("Go away!");
+	}
 });
 
-app.post('/facebook', function(request, response){
-
-	console.log("Received POST: "+request.body);
+app.post('/facebook', function(request, response){       
+		
+	console.log("Received POST: "+JSON.stringify(request.body));
+	
 	response.send("Thanks!");
 
 });
 
 app.get('/fbredir', function(request, response){ 
 
-	response.redirect("https://www.facebook.com/dialog/oauth?client_id=302728933133564&redirect_uri=http:%2F%2Feventfull.herokuapp.com%2Fauthfb&scope=user_status&state=magicalstatecode"); 
+	response.redirect("https://www.facebook.com/dialog/oauth?client_id=302728933133564&redirect_uri=http:%2F%2Feventfull.herokuapp.com%2Fauthfb&scope=user_status,user_checkins,read_stream&state=magicalstatecode"); 
 
 });
 
