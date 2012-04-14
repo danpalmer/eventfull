@@ -1,6 +1,16 @@
 var amqp = require('amqp'); 
 var rabbitURL = process.env.CLOUDAMQP_URL || "amqp://localhost";
 var conn = amqp.createConnection({url: rabbitURL});
+var Pusher = require('node-pusher');
+
+var pusher = new Pusher({
+  appId: '18512',
+  key: 'adc860e9e73f74fd5124',
+  secret: 'ff3c79d99d995fb1039a'
+});
+
+var channel = 'event:1';
+var event = 'message';
 
 conn.on('ready', function () {
 	var exchange = conn.exchange('');
@@ -10,9 +20,10 @@ conn.on('ready', function () {
 	var queue = conn.queue('activities-test', {}, function() {
     queue.subscribe(function (msg) {
       
-
     	redis.lpush('events:1:stream', JSON.stringify(msg));
-
+    	pusher.trigger(channel, event, msg, null, function(err, req, res) {
+    		console.log(err);
+			});
 
 	  });
   });
