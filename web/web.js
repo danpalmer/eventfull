@@ -161,6 +161,7 @@ function runServer(exchange, queue) {
 
 				d = d.split('=',2)[1];
 				d = d.split('&',1)[0];
+				var token = d;
 
 				var optionsIDRequest = {
 			  	host: 'graph.facebook.com',
@@ -178,7 +179,7 @@ function runServer(exchange, queue) {
 
 			  	r.on('end', function () {
 						console.log(buffer.join());
-						redis.set('facebook:'+(buffer.join()).id, d);
+						redis.set('facebook:'+(buffer.join()).id, token);
 						response.redirect('/create#fbsuccess');
 			  	});
 				});
