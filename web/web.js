@@ -53,7 +53,7 @@ app.post('/facebook', function(request, response){
 
 	var user = JSON.stringify(request.body.entry.uid);
 
-	var time = request.body.entry.time);
+	var time = JSON.stringify(request.body.entry.time);
 
 	console.log("User: "+user+"  Time:"+time);
 
