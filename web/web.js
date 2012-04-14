@@ -39,7 +39,7 @@ app.get('/fbredir', function(request, response){
 });
 
 app.get('/authfb', function(request, response){
-	response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/fbtoken&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+response.body.code);
+	response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/fbtoken&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.body.code);
 });
 
 var port = process.env.PORT || 3001;
