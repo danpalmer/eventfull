@@ -64,11 +64,10 @@ function runServer(exchange, queue) {
 
 	/// Get dynamic data for event
 	app.get('/data/:id', function (req, res) {
-		res.send("Hello World.");
 		redis.lrange('events:1:stream', 0, -1, function (err, data) {
 			console.log(data);
 			console.log(err);
-			res.send(data);
+			res.end(data);
 		});
 	});
 
