@@ -91,7 +91,7 @@ app.post('/facebook', function(request, response){
 
 		res.on("data", function (data) {
 			console.log("Test");
-			console.log(data);
+			console.log(data.data);
 			// for(var j = 0; j < data.data.length; j++)
 			// {
 		  //   if (data.data[j].updated_time == time) {
