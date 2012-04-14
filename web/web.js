@@ -51,6 +51,9 @@ app.get('/authfb', function(request, response){
 	https.request(options, function(res) {
 		console.log('STATUS: ' + res.statusCode);
 	  	console.log('HEADERS: ' + JSON.stringify(res.headers));
+		res.on('data', function(d) {
+    			console.log(d);
+  		});
 	});
 
 	//console.log("Access_token="+request.query["access_token"]);
