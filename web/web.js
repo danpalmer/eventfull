@@ -110,7 +110,7 @@ app.post('/facebook', function(request, response){
 						response.send(JSON.stringify(thing.place));
 					}
 					else {
-						console.log("LOLOLOLOL: "+thing.updated_time);
+						console.log("LOLOLOLOL: "+thing['updated_time']);
 					}
 				}
   	});
