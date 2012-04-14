@@ -37,13 +37,10 @@ app.post('/facebook', function(request, response){
         request.on('data', function (data) {
             body += data;
         });
-        request.on('end', function () {
-
-		var POST = querystring.parse(body);           
+        
+	var POST = querystring.parse(body);           
 		
-		console.log("Received POST: "+POST);
-
-        });
+	console.log("Received POST: "+POST);
 	
 	response.send("Thanks!");
 
