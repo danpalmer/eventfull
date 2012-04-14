@@ -93,7 +93,7 @@ function runServer(exchange, queue) {
 
 		console.log("User: "+user+"  Time:"+time);
 
-		redis.get(user, function(error, reply) {
+		redis.get("facebook:"+user, function(error, reply) {
 			var access_token = reply.toString();	
 			var options = {
 	  	host: 'graph.facebook.com',
