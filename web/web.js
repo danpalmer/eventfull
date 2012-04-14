@@ -74,7 +74,7 @@ app.post('/facebook', function(request, response){
 		res.setEncoding('utf8');
 
 		res.on("data", function(d) {
-			console.log("Got data.");
+			console.log("Got data: "+JSON.stringify(d.body));
     			data = d;
 			response.send(data);
   		});
