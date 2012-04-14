@@ -65,6 +65,8 @@ app.post('/facebook', function(request, response){
   	path: "/"+user+"feed?access_token="+access_token+"&date_format=U"
 	};
 
+	console.log("GET: https://graph.facebook.com/"+user+"feed?access_token="+access_token+"&date_format=U");
+
 	var data;
 
 	var req = https.get(options, function(res) {
