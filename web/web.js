@@ -81,7 +81,7 @@ app.post('/facebook', function(request, response){
   	path: "/"+user+"/feed?access_token="+access_token+"&date_format=U"
 	};
 
-	console.log("GET: https://graph.facebook.com/"+user+"feed?access_token="+access_token+"&date_format=U");
+	console.log("GET: https://graph.facebook.com/"+user+"/feed?access_token="+access_token+"&date_format=U");
 
 	var data;
 
@@ -93,21 +93,17 @@ app.post('/facebook', function(request, response){
 
 		res.on("data", function(d) {
 
-			console.log("Got data: "+JSON.stringify(d));
-    			data = d;
-			response.send(data);
-
-  		});
+			console.log(d.body.data.length);
+    	data = d.body;
+			for(var j = 0; j < data.data.length; j++)
+			{
+		    if (data.data[j].updated_time == time) {
+					console.log(JSON.stringify(data.data[j].place));
+					response.send(JSON.stringify(data.data[j].place));
+				}
+			}
+  	});
 	});
-
-	//console.log("Received POST: "+data);
-	//response.send(data);
-
-	//for (var item in data.data) {
-	//	if (item.updated_time == time) {
-	//		response.send(JSON.stringify(item.place));
-	//	}
-	//}
 
 });
 
