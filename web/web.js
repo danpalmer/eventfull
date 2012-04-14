@@ -4,7 +4,7 @@ var http = require('http');
 var https = require('https');
 var app = express.createServer(express.logger());
 var rtg   = require('url').parse(process.env.REDISTOGO_URL);
-var redis = require('redis').createClient(rtg.port, rtg.hostname);
+var redis = require('redis').createClient();
 var moment = require('moment');
 
 /// Set up the RabbitMQ connection
@@ -28,7 +28,7 @@ function runServer(exchange, queue) {
 	/// Serve static files and HTML client pages
 	app.get('/', function (req, res) {
 		res.sendfile(__dirname + '/landing.html');
-		console.log("rtg: "+rtg);
+		console.log("rtg: "+JSON.stringify(rtg));
 		console.log("URL: "+process.env.REDISTOGO_URL);
 		redis.set('foo','bar');
 	});
