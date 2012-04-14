@@ -46,7 +46,7 @@ function parseTweet(data) {
 
 conn.on('ready', function () {
 	var exchange = conn.exchange('');
-  var queue = conn.queue('activities', {}, function() {
+  var queue = conn.queue('activities-test', {}, function() {
     streamTweets(exchange, queue);
   });
 });

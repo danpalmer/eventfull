@@ -15,7 +15,7 @@ var conn = amqp.createConnection({url: rabbitURL});
 /// Establish connection to MQ
 conn.on('ready', function () {
 	var exchange = conn.exchange('');
-  var queue = conn.queue('activities', {}, function() {
+  var queue = conn.queue('activities-test', {}, function() {
     runServer(exchange, queue);
   });
 });
