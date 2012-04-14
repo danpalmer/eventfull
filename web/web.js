@@ -50,12 +50,13 @@ app.get('/authfb', function(request, response){
 	var req = https.get(options, function(res) {
 		console.log('STATUS: ' + res.statusCode);
 	  	console.log('HEADERS: ' + res.headers);
+
+		res.setEncoding('utf8');
+
 		res.on("data", function(d) {
     			console.log(d);
-			return;
   		});
 	});
-	req.end();
 
 	//console.log("Access_token="+request.query["access_token"]);
 	//response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]);
