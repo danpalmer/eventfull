@@ -179,11 +179,32 @@ function runServer(exchange, queue) {
 			res.on("data", function(d) {
 				d = d.split('=',2)[1];
 				d = d.split('&',1)[0];
-				var ID = getIDFromToken(d);
-				while (!ID) ;
-				console.log("authfb: "+getIDFromToken(d));
-				
-				redis.set('facebook:'+getIDFromToken(d), d);
+
+				var options2 = {
+					host: 'graph.facebook.com',
+					port: '443',
+					path: "/me/?access_token="+d
+				};
+
+				var ID = "";
+				var buffer = [];
+				var req2 = https.get(options, function(res) {
+					res.setEncoding('utf8');
+
+					res.on("data", function (data) {
+						buffer.push(data);
+					});
+
+					res.on('end', function () {
+						console.log("getIDFromToken: "+JSON.parse(buffer.join()).id);
+						ID = JSON.parse(buffer.join()).id;
+						result.send('');
+					});
+				});
+
+
+				console.log("authfb: "+ID);
+				redis.set('facebook:'+ID, d);
 				response.redirect('/create#fbsuccess');
 			});
 
