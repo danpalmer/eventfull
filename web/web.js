@@ -64,6 +64,7 @@ function runServer(exchange, queue) {
 
 	/// Get dynamic data for event
 	app.get('/data/:id', function (req, res) {
+		res.header('Content-Type', 'application/json');
 		redis.lrange('events:1:stream', 0, -1, function (err, data) {
 			console.log(data);
 			res.end(JSON.stringify(data));
