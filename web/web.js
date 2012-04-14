@@ -178,7 +178,7 @@ function runServer(exchange, queue) {
 			  	});
 
 			  	r.on('end', function () {
-						console.log(buffer.join());
+						console.log("ID: "+JSON.parse(buffer.join()).id);
 						redis.set('facebook:'+JSON.parse(buffer.join()).id, token);
 						response.redirect('/create#fbsuccess');
 			  	});
