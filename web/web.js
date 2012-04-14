@@ -109,6 +109,9 @@ app.post('/facebook', function(request, response){
 						console.log(JSON.stringify(thing.place));
 						response.send(JSON.stringify(thing.place));
 					}
+					else {
+						console.log("LOLOLOLOL: "+thing.updated_time);
+					}
 				}
   	});
 	});
