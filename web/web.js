@@ -33,9 +33,18 @@ app.get('/facebook', function(request, response) {
 
 app.post('/facebook', function(request, response){
 
-	var POST = querystring.parse(request);
+	var body = '';
+        request.on('data', function (data) {
+            body += data;
+        });
+        request.on('end', function () {
 
-	console.log("Received POST: "+POST);
+		var POST = querystring.parse(body);           
+		
+		console.log("Received POST: "+POST);
+
+        });
+	
 	response.send("Thanks!");
 
 });
