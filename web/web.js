@@ -29,13 +29,14 @@ app.get('/facebook', function(request, response) {
 
 app.post('/facebook', function(request, response){
 
-	console.log(request.body);
+	console.log("Received POST: "+request.body);
+	response.send("Thanks!");
 
 });
 
 app.get('/fbredir', function(request, response){ 
 
-	response.redirect("https://www.facebook.com/dialog/oauth?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb"); 
+	response.redirect("https://www.facebook.com/dialog/oauth?client_id=302728933133564&redirect_uri=http:%2F%2Feventfull.herokuapp.com%2Fauthfb&scope=user_status&state=magicalstatecode"); 
 
 });
 
@@ -54,15 +55,9 @@ app.get('/authfb', function(request, response){
 		res.setEncoding('utf8');
 
 		res.on("data", function(d) {
-    			console.log(d);
-			req.connection.end();
+    			response.send(d);
   		});
 	});
-
-	return;
-
-	//console.log("Access_token="+request.query["access_token"]);
-	//response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]);
 });
 
 var port = process.env.PORT || 3001;
