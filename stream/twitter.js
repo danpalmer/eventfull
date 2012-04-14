@@ -24,6 +24,7 @@ function parseTweet(data) {
 	tweet.user = data.user.screen_name;
 	tweet.username = data.user.name;
 	tweet.timestamp = data.created_at;
+	tweet.text = data.text;
 	if (data.place) {
 		tweet.place = data.place.full_name;
 	}
