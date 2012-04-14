@@ -237,5 +237,4 @@ function runServer(exchange, queue) {
 			}
 		]);
 	});
-
 }
