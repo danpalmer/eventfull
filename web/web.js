@@ -31,11 +31,9 @@ app.get('/facebook', function(request, response) {
 	}
 });
 
-app.post('/facebook', function(request, response){
-        
-	var POST = request.query["object"];           
+app.post('/facebook', function(request, response){       
 		
-	console.log("Received POST: "+POST);
+	console.log("Received POST: "+request.query["object"]);
 	
 	response.send("Thanks!");
 
