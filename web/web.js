@@ -40,7 +40,7 @@ app.get('/fbredir', function(request, response){
 
 app.get('/authfb', function(request, response){
 
-	var req = http.req({
+	var req = app.request({
 		host: "graph.facebook.com",
 		port: 443,
 		method: "GET",
