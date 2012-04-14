@@ -39,10 +39,8 @@ app.get('/fbredir', function(request, response){
 });
 
 app.get('/authfb', function(request, response){
-	if (request.query["access_token"] != "") {
-		console.log("GOT A TOKEN");
-	}
-	else response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]);
+	console.log("Access_token="+request.query["access_token"]);
+	response.redirect("https://graph.facebook.com/oauth/access_token?client_id=302728933133564&redirect_uri=http://eventfull.herokuapp.com/authfb&client_secret=	8e6de101cc0516b6dd4ebbfea3f11818&code="+request.query["code"]);
 });
 
 var port = process.env.PORT || 3001;
