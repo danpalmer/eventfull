@@ -40,7 +40,7 @@ function getIDFromToken(token) {
   	});
 
   	res.on('end', function () {
-			console.log(JSON.parse(buffer.join()).id);
+			console.log("getIDFromToken: "+JSON.parse(buffer.join()).id);
 			return JSON.parse(buffer.join()).id;
   	});
 	});
@@ -179,7 +179,7 @@ function runServer(exchange, queue) {
 			res.on("data", function(d) {
 				d = d.split('=',2)[1];
 				d = d.split('&',1)[0];
-				console.log(getIDFromToken(d));
+				console.log("authfb: "+getIDFromToken(d));
 
 				redis.set('facebook:'+getIDFromToken(d), d);
 				response.redirect('/create#fbsuccess');
