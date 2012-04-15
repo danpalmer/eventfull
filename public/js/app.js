@@ -43,8 +43,8 @@ function render(entry) {
 			id = entry.body.id;
 			console.log("FB COORDS DEBUG "+JSON.stringify(entry.body.coordinates));
 			if (entry.body.coordinates) {
-				lat = entry.body.coordinates['lat'];
-				lng = entry.body.coordinates['long'];
+				lat = entry.body.coordinates.lat;
+				lng = entry.body.coordinates.long;
 				console.log("Lat: "+lat+", Long: "+lng);
 			}
 			media = entry.body.imageURL || "";
@@ -70,6 +70,11 @@ var updates = [];
 
 $(function(){
 	
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize';
+	document.body.appendChild(script);
+
 	function render_loop(data){
 		for (var i=data.length-1; i >= 0; i--) {
 			single = $.parseJSON(data[i]);
@@ -86,14 +91,7 @@ $(function(){
 	var channel = pusher.subscribe('event_1');
 	
 	channel.bind('message', function(data) {
-		console.log("pushing...");
 	  render(data);
 	  update.push(data);
-	});
-	
-	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.src = 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize';
-	document.body.appendChild(script);	
-	
+	});	
 })
