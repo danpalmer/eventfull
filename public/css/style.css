@@ -55,14 +55,18 @@ footer {
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3), 0 2px 5px rgba(0, 0, 0, 0.3);
   padding: 20px;
   margin: 20px auto;
-  width: 60%; }
+  width: 60%;
+  border-radius: 10px;
+  border-top-left-radius: 0; }
   #stream article img.service {
     width: 32px;
     height: 32px;
     float: left;
     position: absolute;
     top: 0;
-    left: -32px; }
+    left: -32px;
+    margin: 0;
+    box-shadow: none; }
   #stream article h1 {
     margin: 0;
     margin-bottom: 15px;
