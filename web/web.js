@@ -196,13 +196,16 @@ function runServer(exchange, queue) {
 	});
 	
 	app.post('/foursquare', function (req, res) {
+
+		console.log(JSON.stringify(req.body));
+
 		var checkin = {};
 		checkin.id = req.body.id
 		checkin.user = req.body.user.firstName + " " + req.body.user.lastName;
 		checkin.username = req.body.user.firstName + " " + req.body.user.lastName;
 		checkin.timestamp = req.body.createdAt;
 		checkin.service = 'foursquare';
-		
+
 		checkin.place = req.body.venue.name;
 		checkin.coordinates = {
 			'lat':req.body.venue.location.lat,
