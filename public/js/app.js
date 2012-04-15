@@ -70,6 +70,11 @@ var updates = [];
 
 $(function(){
 	
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize';
+	document.body.appendChild(script);
+	
 	function render_loop(data){
 		for (var i=data.length-1; i >= 0; i--) {
 			single = $.parseJSON(data[i]);
@@ -86,14 +91,7 @@ $(function(){
 	var channel = pusher.subscribe('event_1');
 	
 	channel.bind('message', function(data) {
-		console.log("pushing...");
 	  render(data);
 	  update.push(data);
-	});
-	
-	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.src = 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize';
-	document.body.appendChild(script);	
-	
+	});	
 })
