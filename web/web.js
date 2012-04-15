@@ -191,25 +191,21 @@ function runServer(exchange, queue) {
 
 	});
 
-	// app.get('/foursquare', function (req, res) {
-	// 	res.sendfile(__dirname + '/foursquare.html');
-	// });
+	app.get('/foursquare', function (req, res) {
+		res.sendfile(__dirname + '/foursquare.html');
+	});
 	
 	app.post('/foursquare', function (req, res) {
+
+		console.log(JSON.stringify(req.body));
+
 		var checkin = {};
 		checkin.id = req.body.id
 		checkin.user = req.body.user.firstName + " " + req.body.user.lastName;
 		checkin.username = req.body.user.firstName + " " + req.body.user.lastName;
 		checkin.timestamp = req.body.createdAt;
 		checkin.service = 'foursquare';
-		
-		if (data[index].place) {
-			update.place = data[index].place.name;
-			update.coordinates = {
-				'lat':data[index].place.location.latitude,
-				'long':data[index].place.location.longitude
-			};
-		}
+
 		checkin.place = req.body.venue.name;
 		checkin.coordinates = {
 			'lat':req.body.venue.location.lat,
