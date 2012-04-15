@@ -112,7 +112,7 @@ function runServer(exchange, queue) {
 						update.id = data[index].id;
 						update.user = user;
 						update.username = data[index].from.name;
-						update.timestamp = moment(time).format('ddd MMM DD HH:mm:ss Z YYYY');
+						update.timestamp = moment(time).format("ddd MMM DD HH:mm:ss Z YYYY");
 						update.service = 'facebook';
 						
 						if (data[index].place) {
