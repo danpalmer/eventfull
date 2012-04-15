@@ -27,6 +27,7 @@ header {
     margin-left: 20%; }
 
 footer {
+  display: none;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -58,6 +59,8 @@ footer {
   width: 60%;
   border-radius: 10px;
   border-top-left-radius: 0; }
+  #stream article.new {
+    opacity: 0; }
   #stream article img.service {
     width: 32px;
     height: 32px;
