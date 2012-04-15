@@ -24,7 +24,7 @@ $(function(){
 		// data = data.replace('\\"','"');
 		// data = JSON.parse(data);
 		// console.log(data);
-		for (var i=0; i < data.length; i++) {
+		for (var i=data.length-1; i >= 0; i--) {
 			console.log("boner");
 			single = $.parseJSON(data[i]);
 			console.log(single);
