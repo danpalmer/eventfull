@@ -109,14 +109,14 @@ function runServer(exchange, queue) {
 				for (var index in data) {
 					if (data[index].updated_time == time) {
 						var update = {};
-						update.id = data.id;
-						update.user = data.from['name'];
+						update.id = data[index].id;
+						update.user = data[index].from.name;
 						update.username = user;
 						update.timestamp = moment(time).format('ddd MMM DD HH:mm:ss Z YYYY');
 						update.service = 'facebook';
 						
 						if (data[index].place) {
-							update.place = data[index].place['name'];
+							update.place = data[index].place.name;
 							update.coordinates = {
 								'lat':data[index].place.location.latitude,
 								'long':data[index].place.location.longitude
