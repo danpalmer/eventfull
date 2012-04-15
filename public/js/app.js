@@ -28,7 +28,7 @@ $(function(){
 			console.log("boner");
 			single = $.parseJSON(data[i]);
 			console.log(single);
-			// render(data[i]);
+			render(single);
 		}
 	}
 
