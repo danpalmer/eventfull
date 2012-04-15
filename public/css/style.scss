@@ -64,6 +64,8 @@ footer {
 	padding:20px;
 	margin:20px auto;
 	width:60%;
+	border-radius:10px;
+	border-top-left-radius:0;
 	img.service {
 		width:32px;
 		height:32px;
@@ -71,6 +73,8 @@ footer {
 		position:absolute;
 		top:0;
 		left:-32px;
+		margin:0;
+		box-shadow:none;
 	}
 	h1 {
 		margin:0;
