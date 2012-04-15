@@ -59,7 +59,7 @@ $(function(){
 				heading = entry.body.text;
 				author = entry.body.user;
 				author_link = "http://twitter.com/"+author;
-				location = entry.body.locationText;
+				location = entry.body.place;
 				if (entry.body.coordinates) {
 					lat = entry.body.coordinates.coordinates[0];
 					lng = entry.body.coordinates.coordinates[1];
