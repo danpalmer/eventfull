@@ -65,5 +65,9 @@ footer {
     margin: 0;
     display: inline-block;
     font-family: georgia,serif;
+    font-weight: 400;
     font-style: italic;
-    font-size: 25px; }
+    font-size: 25px;
+    line-height: 1.4; }
+  #stream article img {
+    max-width: 100%; }
