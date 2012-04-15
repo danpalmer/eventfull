@@ -45,7 +45,8 @@ footer {
 
 #stream article {
   position: relative;
-  background: #ddd;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3), 0 2px 5px rgba(0, 0, 0, 0.3);
   padding: 20px;
   margin: 10px auto;
   width: 60%; }
@@ -57,6 +58,7 @@ footer {
     top: 0;
     left: -32px; }
   #stream article h1 {
+    margin: 0;
     display: inline-block;
     font-family: georgia,serif;
     font-style: italic;
