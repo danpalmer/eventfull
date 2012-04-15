@@ -3,7 +3,7 @@ var latlngs = [];
 function initialize() {
 	var myOptions = {
 		zoom: 15,
-		center: new google.maps.LatLng(51.522396055,-0.1098203659057),
+		center: new google.maps.LatLng(11.522396055,-0.1098203659057),
 		mapTypeId: google.maps.MapTypeId.TERRAIN,
 		mapTypeControl: false,
 		streetViewControl: false,
