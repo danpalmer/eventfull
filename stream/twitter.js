@@ -21,6 +21,7 @@ function streamTweets(exchange, queue) {
 
 function parseTweet(data) {
 	var tweet = {};
+	tweet.id = data.id;
 	tweet.user = data.user.screen_name;
 	tweet.username = data.user.name;
 	tweet.timestamp = data.created_at;
