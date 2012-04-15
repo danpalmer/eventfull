@@ -19,9 +19,9 @@ function initialize() {
 $(function(){
 	
 	function render_loop(data){
-		data = $.parseJSON(data);
+		// data = $.parseJSON(data);
 		// data = JSON.parse(data);
-		// data = data.replace('\\"','"');
+		data = data.replace('\\"','"');
 		console.log(data);
 		// for (var i=0; i < data.length; i++) {
 		// 	console.log("boner");
