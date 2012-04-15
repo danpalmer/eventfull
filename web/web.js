@@ -67,7 +67,7 @@ function runServer(exchange, queue) {
 		res.header('Content-Type', 'application/json');
 		redis.lrange('events:1:stream', 0, -1, function (err, data) {
 			console.log(data);
-			res.end(JSON.stringify(data));
+			res.end(data);
 		});
 	});
 
