@@ -41,7 +41,10 @@ footer {
   height: 350px;
   position: fixed !important;
   top: 0;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.8); }
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
+  z-index: 5; }
+  #map > div {
+    z-index: 6; }
 
 #stream {
   padding-top: 350px; }
@@ -62,6 +65,7 @@ footer {
     left: -32px; }
   #stream article h1 {
     margin: 0;
+    margin-bottom: 15px;
     font-family: georgia,serif;
     font-weight: 400;
     font-style: italic;
