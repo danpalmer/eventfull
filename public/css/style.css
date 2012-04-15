@@ -44,7 +44,7 @@ footer {
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.8); }
 
 #stream {
-  padding-top: 400px; }
+  padding-top: 350px; }
 
 #stream article {
   z-index: -1;
@@ -71,3 +71,7 @@ footer {
     line-height: 1.4; }
   #stream article img {
     max-width: 100%; }
+  #stream article p {
+    float: left; }
+  #stream article p.location {
+    margin-left: 10px; }

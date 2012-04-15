@@ -50,7 +50,7 @@ footer {
 }
 
 #stream {
-	padding-top:400px;
+	padding-top:350px;
 }
 
 #stream article {
@@ -80,5 +80,11 @@ footer {
 	}
 	img {
 		max-width:100%;
+	}
+	p {
+		float:left;
+	}
+	p.location {
+		margin-left:10px;
 	}
 }
