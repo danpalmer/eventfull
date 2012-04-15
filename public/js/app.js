@@ -22,11 +22,13 @@ $(function(){
 		// data = $.parseJSON(data);
 		// data = JSON.parse(data);
 		// data = data.replace('\\"','"');
-		data = JSON.parse(JSON.parse(data));
-		console.log(data);
+		// data = JSON.parse(data);
+		// console.log(data);
 		for (var i=0; i < data.length; i++) {
 			console.log("boner");
-			render(data[i]);
+			single = $.parseJSON(data[i]);
+			console.log(single);
+			// render(data[i]);
 		}
 	}
 
