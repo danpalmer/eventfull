@@ -203,13 +203,6 @@ function runServer(exchange, queue) {
 		checkin.timestamp = req.body.createdAt;
 		checkin.service = 'foursquare';
 		
-		if (data[index].place) {
-			update.place = data[index].place.name;
-			update.coordinates = {
-				'lat':data[index].place.location.latitude,
-				'long':data[index].place.location.longitude
-			};
-		}
 		checkin.place = req.body.venue.name;
 		checkin.coordinates = {
 			'lat':req.body.venue.location.lat,
