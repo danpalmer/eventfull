@@ -131,7 +131,7 @@ function runServer(exchange, queue) {
 						}
 
 						if (data[index].place || data[index].picture || data[index].message) {
-							exchange.publish(queue.name, {body: JSON.stringify(update)});
+							exchange.publish(queue.name, {body: update});
 						}
 
 					}
