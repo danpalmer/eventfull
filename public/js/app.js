@@ -19,11 +19,14 @@ function initialize() {
 $(function(){
 	
 	function render_loop(data){
+		// data = $.parseJSON(data);
+		// data = JSON.parse(data);
+		// data = data.replace('\\"','"');
 		console.log(data);
-		// for (var i=0; i < data.length; i++) {
-		// 	console.log("boner");
-		// 	// render(data[i]);
-		// }
+		for (var i=0; i < data.length; i++) {
+			console.log("boner");
+			render(data[i]);
+		}
 	}
 
 	// // Get test data
@@ -37,7 +40,7 @@ $(function(){
 	// 		},
 	// 		dataType:'jsonp'
 	// });
-	// 
+
 	$.get('http://eventfull.herokuapp.com/data/1',function(data){
 		render_loop(data);
 	});
