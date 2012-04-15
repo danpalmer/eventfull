@@ -41,6 +41,7 @@ function render(entry) {
 		case "facebook":
 			author_link = "http://facebook.com/"+entry.body.username;
 			id = entry.body.id;
+			console.log("FB COORDS DEBUG "+JSON.stringify(entry.body.coordinates));
 			if (entry.body.coordinates) {
 				lat = entry.body.coordinates['lat'];
 				lng = entry.body.coordinates['long'];
@@ -71,9 +72,7 @@ $(function(){
 	
 	function render_loop(data){
 		for (var i=data.length-1; i >= 0; i--) {
-			console.log("boner");
 			single = $.parseJSON(data[i]);
-			console.log(single);
 			render(single);
 		}
 	}
