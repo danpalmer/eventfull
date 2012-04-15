@@ -41,7 +41,7 @@ function runServer(exchange, queue) {
 	});
 
 	app.use('/public', express.static(__dirname + '/../public/'));
-
+	app.use('/stream', express.static(__dirname + '/stream'));
 	/// Create events in redis
 	app.post('/create', function (req, res) {
 		console.log(req.query);
