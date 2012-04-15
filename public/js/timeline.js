@@ -68,6 +68,8 @@ function changeBackground(){
 
 //	var addNumberOfHours24 = Math.floor(addNumberOfHours)
 
+	
+	
 	document.getElementById('eventNameDate').innerHTML = eventName + " | " + startTime + " - " + endTime + " | "+newTime;
 	return newTime;
 }// end of function
