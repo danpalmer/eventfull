@@ -20,7 +20,7 @@ conn.on('ready', function () {
 	var queue = conn.queue('activities-test', {}, function() {
     queue.subscribe(function (msg) {
       
-    	redis.lpush('events:1:stream', msg);
+    	redis.lpush('events:1:stream', JSON.stringify(msg));
     	pusher.trigger(channel, event, msg, null, function(err, req, res) {
     		console.log(err);
 			});
