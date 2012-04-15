@@ -1,6 +1,8 @@
+var latlngs = [];
+
 function initialize() {
 	var myOptions = {
-		zoom: 13,
+		zoom: 15,
 		center: new google.maps.LatLng(51.522396055,-0.1098203659057),
 		mapTypeId: google.maps.MapTypeId.TERRAIN,
 		mapTypeControl: false,
@@ -9,6 +11,8 @@ function initialize() {
 	};
 
 	map = new google.maps.Map(document.getElementById('map'), myOptions);
+	
+	latlngs = new google.maps.LatLngBounds();
 }
 
 
@@ -64,6 +68,8 @@ function render(entry) {
 			animation: google.maps.Animation.DROP,
 			title: heading
 		});
+		latlngs.extend(new google.maps.LatLng(lat,lng));
+		map.fitBounds(latlngs);
 	};
 }
 
