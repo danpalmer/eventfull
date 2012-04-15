@@ -53,6 +53,7 @@ $(function(){
 				author_link = "http://facebook.com/"+entry.body.username;
 				location = entry.body.place || "";
 				id = entry.body.id;
+				console.log("FB COORDS DEBUG "+JSON.stringify(entry.body.coordinates));
 				if (entry.body.coordinates) {
 					lat = entry.body.coordinates['lat'];
 					lng = entry.body.coordinates['long'];
