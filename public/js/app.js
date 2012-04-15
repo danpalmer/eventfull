@@ -58,7 +58,7 @@ function render(entry) {
 	
 	if (lat && lng) {
 		var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(lng,lat),
+			position: new google.maps.LatLng(lat,lng),
 			map: map,
 			animation: google.maps.Animation.DROP,
 			title: heading
