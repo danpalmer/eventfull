@@ -199,17 +199,19 @@ function runServer(exchange, queue) {
 
 		console.log(JSON.stringify(req.body));
 
+		var foursquare = req.body.checkin;
+
 		var checkin = {};
-		checkin.id = req.body.id
-		checkin.user = req.body.user.firstName + " " + req.body.user.lastName;
-		checkin.username = req.body.user.firstName + " " + req.body.user.lastName;
-		checkin.timestamp = req.body.createdAt;
+		checkin.id = foursquare.id
+		checkin.user = foursquare.user.firstName + " " + foursquare.user.lastName;
+		checkin.username = foursquare.user.firstName + " " + foursquare.user.lastName;
+		checkin.timestamp = foursquare.createdAt;
 		checkin.service = 'foursquare';
 
-		checkin.place = req.body.venue.name;
+		checkin.place = foursquare.venue.name;
 		checkin.coordinates = {
-			'lat':req.body.venue.location.lat,
-			'long':req.body.venue.location.lng
+			'lat':foursquare.venue.location.lat,
+			'long':foursquare.venue.location.lng
 		};
 
 		checkin.text = checkin.user + " checked in at " + checkin.place + " on Foursquare.";
