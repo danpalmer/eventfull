@@ -1,15 +1,3 @@
-function initialize() {
-	var myOptions = {
-		zoom: 13,
-		center: new google.maps.LatLng(51.522396055,-0.1098203659057),
-		mapTypeId: google.maps.MapTypeId.TERRAIN,
-		mapTypeControl: false,
-		streetViewControl: false,
-		zoomControl: false
-	};
-
-	map = new google.maps.Map(document.getElementById('map'), myOptions);
-}
 
 // Render an entry
 function render(entry) {
@@ -69,6 +57,9 @@ function render(entry) {
 var update = [];
 
 $(function(){
+
+	load_script();
+
 	function render_loop(data){
 		for (var i=data.length-1; i >= 0; i--) {
 			single = $.parseJSON(data[i]);
