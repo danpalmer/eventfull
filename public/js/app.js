@@ -50,7 +50,7 @@ $(function(){
 				};
 				break;
 			case "facebook":
-				author_link = "http://facebook.com/"+author;
+				author_link = "http://facebook.com/"+entry.body.username;
 				location = entry.body.place || "";
 				id = entry.body.id;
 				if (entry.body.coordinates) {
