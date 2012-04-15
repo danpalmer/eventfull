@@ -58,7 +58,7 @@ function render(entry) {
 	
 	if (lat && lng) {
 		var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(lng,lat),
+			position: new google.maps.LatLng(lat,lng),
 			map: map,
 			animation: google.maps.Animation.DROP,
 			title: heading
@@ -66,15 +66,9 @@ function render(entry) {
 	};
 }
 
-var updates = [];
+var update = [];
 
 $(function(){
-	
-	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.src = 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize';
-	document.body.appendChild(script);
-
 	function render_loop(data){
 		for (var i=data.length-1; i >= 0; i--) {
 			single = $.parseJSON(data[i]);
