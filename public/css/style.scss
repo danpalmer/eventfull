@@ -54,7 +54,6 @@ footer {
 }
 
 #stream article {
-	z-index:-1;
 	position:relative;
 	background:rgba(255,255,255,0.8);
 	box-shadow:inset 0 0 15px rgba(0,0,0,0.3), 0 2px 5px rgba(0,0,0,0.3);
@@ -71,7 +70,6 @@ footer {
 	}
 	h1 {
 		margin:0;
-		display:inline-block;
 		font-family:georgia,serif;
 		font-weight:400;
 		font-style:italic;
