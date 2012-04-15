@@ -69,5 +69,6 @@ function changeBackground(){
 //	var addNumberOfHours24 = Math.floor(addNumberOfHours)
 
 	document.getElementById('timeline_date').innerHTML = newTime;
+
 	return newTime;
 }// end of function

@@ -15,7 +15,9 @@ $(function(){
 		$.get("https://api.foursquare.com/v2/users/self/checkins?oauth_token="+oauth_token,function(data){		
 			$.each(data['response']['checkins']['items'], function(index, result){// data.results
 				// convert string and put on message queue
-				$('#code').append("<p>"+result.venue.name+"</p>");//get all locations
+				window.location.href = '/create#fssuccess';
+				//$('#code').append("<p>"+result.venue.name+"</p>");//get all locations
+				
 			});
 		});
 		$.bbq.pushState({}, 2);
