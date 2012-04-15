@@ -191,6 +191,10 @@ function runServer(exchange, queue) {
 
 	});
 
+	app.get('/foursquare', function (req, res) {
+		res.sendfile(__dirname + '/foursquare.html');
+	});
+	
 	var port = process.env.PORT || 3001;
 	app.listen(port, function() {
 	  console.log("Listening on " + port);
