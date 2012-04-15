@@ -59,7 +59,12 @@ function render(entry) {
 			break;
 	}
 	// Build entry article
-	$("<article id='"+service+"_"+id+"'><img class='service' src='/public/images/services/"+service+".jpg'><h1>"+heading+"</h1><p class='author'><a href='"+author_link+"'>"+author+"</a></p><p class='location'>"+location+"</p>"+media+"</article>").prependTo("#stream");
+	postHTML = $("<article class="new" id='"+service+"_"+id+"'><img class='service' src='/public/images/services/"+service+".jpg'><h1>"+heading+"</h1><p class='author'><a href='"+author_link+"'>"+author+"</a></p><p class='location'>"+location+"</p>"+media+"</article>").prependTo("#stream").animate({
+		"opacity":1
+	},500).removeClass("new");
+	
+	
+	
 	
 	if (lat && lng) {
 		var marker = new google.maps.Marker({
