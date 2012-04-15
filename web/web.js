@@ -134,7 +134,7 @@ function runServer(exchange, queue) {
 	});
 
 	app.get('/fbredir', function(request, response){ 
-		response.redirect("https://www.facebook.com/dialog/oauth?client_id=302728933133564&redirect_uri=http:%2F%2Feventfull.herokuapp.com%2Fauthfb&scope=user_status,user_checkins,read_stream&state=magicalstatecode"); 
+		response.redirect("https://www.facebook.com/dialog/oauth?client_id=302728933133564&redirect_uri=http:%2F%2Feventfull.herokuapp.com%2Fauthfb&scope=user_status,user_checkins,read_stream,user_photos&state=magicalstatecode"); 
 	});
 
 	app.get('/authfb', function(request, response){
