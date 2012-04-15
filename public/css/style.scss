@@ -54,6 +54,7 @@ footer {
 }
 
 #stream article {
+	position:relative;
 	background:#ddd;
 	padding:20px;
 	margin:10px auto;
@@ -62,6 +63,9 @@ footer {
 		width:32px;
 		height:32px;
 		float:left;
+		position:absolute;
+		top:0;
+		left:-32px;
 	}
 	h1 {
 		display:inline-block;
