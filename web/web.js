@@ -113,14 +113,15 @@ function runServer(exchange, queue) {
 							var update = {};
 							update.user = user;
 							update.username = user;
-
 							update.timestamp = moment(time).format('ddd MMM DD HH:mm:ss Z YYYY');
-							
 							update.place = data[index].name;
 							update.service = 'facebook';
 							update.coordinates = {
 								'lat':data[index].place.location.latitude,
 								'long':data[index].place.location.longitude
+							};
+							if (data.source) {
+								update.mediaURL = data.source;
 							};
 							exchange.publish(queue.name, {body: JSON.stringify(update)});
 						}
