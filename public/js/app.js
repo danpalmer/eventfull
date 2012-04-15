@@ -53,34 +53,36 @@ $(function(){
 	// Render an entry
 	function render(entry) {
 		var heading, author, location, id, author_link, lat, lng;
-		service = entry.body.service
+		service = entry.body.service;
 		switch (service) {
 			case "twitter":
 				heading = entry.body.text;
 				author = entry.body.user;
 				author_link = "http://twitter.com/"+author;
-				location = entry.body.locationText;
+				location = entry.body.place || "";
 				if (entry.body.coordinates) {
 					lat = entry.body.coordinates.coordinates[0];
 					lng = entry.body.coordinates.coordinates[1];
 				}
 				// location = "Locationings"
-				// id = entry.body.id;
-				id = "9001";
-				if (entry.mediaURL) {
-					media = entry.mediaURL;
-				}
+				id = entry.body.id;
+				// id = "9001";
+				media = entry.body.imageURL || "";
+				if (media != "") {
+					media = "<img src='"+media+"'>";
+				};
+				
 				break;
 			case "facebook":
-				heading = entry.text;
-				author = entry.user;
+				heading = entry.body.text;
+				author = entry.body.user;
 				author_link = "http://facebook.com/"+author;
-				location = entry.locationText;
-				id = entry.id;
+				location = entry.body.place || "";
+				id = entry.body.id;
 				break;
 		}
 		// Build entry article
-		$("<article id='"+service+"_"+id+"'><img class='service' src='/public/images/services/"+service+".jpg'><h1>"+heading+"</h1><p class='author'><a href='"+author_link+"'>"+author+"</a></p><p class='location'>"+location+"</p></article>").prependTo("#stream");
+		$("<article id='"+service+"_"+id+"'><img class='service' src='/public/images/services/"+service+".jpg'><h1>"+heading+"</h1><p class='author'><a href='"+author_link+"'>"+author+"</a></p><p class='location'>"+location+"</p>"+media+"</article>").prependTo("#stream");
 		
 		if (lat && lng) {
 			console.log("LOCATION BONER");
