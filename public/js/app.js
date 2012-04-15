@@ -59,24 +59,24 @@ $(function(){
 				heading = entry.body.text;
 				author = entry.body.user;
 				author_link = "http://twitter.com/"+author;
-				location = entry.body.place;
+				location = entry.body.place || "";
 				if (entry.body.coordinates) {
 					lat = entry.body.coordinates.coordinates[0];
 					lng = entry.body.coordinates.coordinates[1];
 				}
 				// location = "Locationings"
-				// id = entry.body.id;
-				id = "9001";
+				id = entry.body.id;
+				// id = "9001";
 				if (entry.mediaURL) {
 					media = entry.mediaURL;
 				}
 				break;
 			case "facebook":
-				heading = entry.text;
-				author = entry.user;
+				heading = entry.body.text;
+				author = entry.body.user;
 				author_link = "http://facebook.com/"+author;
-				location = entry.locationText;
-				id = entry.id;
+				location = entry.body.place;
+				id = entry.body.id;
 				break;
 		}
 		// Build entry article
