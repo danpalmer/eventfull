@@ -79,6 +79,10 @@ $(function(){
 				author_link = "http://facebook.com/"+author;
 				location = entry.body.place || "";
 				id = entry.body.id;
+				if (entry.body.coordinates) {
+					lat = entry.body.coordinates['lat'];
+					lng = entry.body.coordinates['long'];
+				}
 				break;
 		}
 		// Build entry article
