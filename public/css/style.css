@@ -72,6 +72,6 @@ footer {
   #stream article img {
     max-width: 100%; }
   #stream article p {
-    float: left; }
+    display: inline; }
   #stream article p.location {
     margin-left: 10px; }
