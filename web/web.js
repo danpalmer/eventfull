@@ -191,9 +191,9 @@ function runServer(exchange, queue) {
 
 	});
 
-	// app.get('/foursquare', function (req, res) {
-	// 	res.sendfile(__dirname + '/foursquare.html');
-	// });
+	app.get('/foursquare', function (req, res) {
+		res.sendfile(__dirname + '/foursquare.html');
+	});
 	
 	app.post('/foursquare', function (req, res) {
 		var checkin = {};
