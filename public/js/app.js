@@ -19,10 +19,13 @@ function initialize() {
 $(function(){
 	
 	function render_loop(data){
+		data = $.parseJSON(data);
+		// data = JSON.parse(data);
+		// data = data.replace('\\"','"');
 		console.log(data);
 		// for (var i=0; i < data.length; i++) {
 		// 	console.log("boner");
-		// 	// render(data[i]);
+		// 	render(data[i]);
 		// }
 	}
 
@@ -37,7 +40,7 @@ $(function(){
 	// 		},
 	// 		dataType:'jsonp'
 	// });
-	// 
+
 	$.get('http://eventfull.herokuapp.com/data/1',function(data){
 		render_loop(data);
 	});
