@@ -17,56 +17,57 @@
 
 
 function changeBackground(){
-// make variables to get the values from the slicder
-var sliderValue = parseInt(document.getElementById('slider').value);
-var maxOfSlice = 1000;
+//	make variables to get the values from the slicder
+	var sliderValue = parseInt(document.getElementById('slider').value);
+	var maxOfSlice = 1000;
 
-var eventName = "London Real Time";
-var startTime = "April 13th";
-var endTime = "April 15th";
+	var eventName = "London Real Time";
+	var startTime = "April 13th";
+	var endTime = "April 15th";
 
-var startTimeFormat = 201204130000;// may use other format
-var endTimeFormat = 201204152359;
+	var startTimeFormat = 201204130000;// may use other format
+	var endTimeFormat = 201204152359;
 
-//Calculate endTime-startTime
-var twoTimeDiff = endTimeFormat - startTimeFormat;//22359 => 2 days, 23 hours, 59 mins
+//	Calculate endTime-startTime
+	var twoTimeDiff = endTimeFormat - startTimeFormat;//22359 => 2 days, 23 hours, 59 mins
 
-var timeDiffInMinutes = 4319;//Equation need to be done when I am not sleepy.
-var ll = timeDiffInMinutes/1000;// 4.319
-var timelineTimeDiffInMinute = ll*sliderValue;// eg 5000
-var timelineAddToMinutes = Math.floor(timelineTimeDiffInMinute%60);//71
-var timelineTotalHours = Math.floor(timelineTimeDiffInMinute/60);//71
-var timelineAddToHour = timelineTotalHours%24;
-var timelineAddToDay = Math.floor(timelineTotalHours/24);
+	var timeDiffInMinutes = 4319;//Equation need to be done when I am not sleepy.
+	var ll = timeDiffInMinutes/1000;// 4.319
+	var timelineTimeDiffInMinute = ll*sliderValue;// eg 5000
+	var timelineAddToMinutes = Math.floor(timelineTimeDiffInMinute%60);//71
+	var timelineTotalHours = Math.floor(timelineTimeDiffInMinute/60);//71
+	var timelineAddToHour = timelineTotalHours%24;
+	var timelineAddToDay = Math.floor(timelineTotalHours/24);
 
-var newYear = 2012;
-var newMonth = 04;
-var newDay = timelineAddToDay + 13;
-var newHour = timelineAddToHour + 0;
-var newMinute = timelineAddToMinutes + 0;
+	var newYear = 2012;
+	var newMonth = 04;
+	var newDay = timelineAddToDay + 13;
+	var newHour = timelineAddToHour + 0;
+	var newMinute = timelineAddToMinutes + 0;
 
-var newTime = newYear+"."+newMonth+"."+newDay+"."+newHour+":"+newMinute;
-//return right current time on timeline
+	var newTime = newYear+"."+newMonth+"."+newDay+"."+newHour+":"+newMinute;
+//	return right current time on timeline
 
 
-////var numberOfDays = Math.floor(timeDiffInSecond/10000);
-//var numberOfDays = 2;
-//
-//var numberOfHours = 23;
-//
-//var numberOfMinutes = 59;
-//
-//var timeDiffInMinutes = numberOfDays*24*60+numberOfHours*60+numberOfMinutes;
-//
-//// return time in timeline
-//var ll = timeDiffInMinutes/maxOfSlice;
-//
-//var addTimeInMinutes = 500*ll;
-//
-//var addNumberOfHours = Math.floor(addTimeInMinutes/60);
-//var addNumberOfMinutes60 = addTimeInMinutes%60
-//
-//var addNumberOfHours24 = Math.floor(addNumberOfHours)
+////	var numberOfDays = Math.floor(timeDiffInSecond/10000);
+//	var numberOfDays = 2;
 
-document.getElementById('eventNameDate').innerHTML = eventName + " | " + startTime + " - " + endTime + " | "+newTime;
+//	var numberOfHours = 23;
+
+//	var numberOfMinutes = 59;
+
+//	var timeDiffInMinutes = numberOfDays*24*60+numberOfHours*60+numberOfMinutes;
+
+////	return time in timeline
+//	var ll = timeDiffInMinutes/maxOfSlice;
+
+//	var addTimeInMinutes = 500*ll;
+
+//	var addNumberOfHours = Math.floor(addTimeInMinutes/60);
+//	var addNumberOfMinutes60 = addTimeInMinutes%60
+
+//	var addNumberOfHours24 = Math.floor(addNumberOfHours)
+
+	document.getElementById('eventNameDate').innerHTML = eventName + " | " + startTime + " - " + endTime + " | "+newTime;
+	return newTime;
 }// end of function
