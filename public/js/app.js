@@ -30,8 +30,8 @@ function render(entry) {
 		case "twitter":
 			author_link = "http://twitter.com/"+entry.body.username;
 			if (entry.body.coordinates) {
-				lat = entry.body.coordinates.coordinates[0];
-				lng = entry.body.coordinates.coordinates[1];
+				lat = entry.body.coordinates.coordinates[1];
+				lng = entry.body.coordinates.coordinates[0];
 			}
 			media = entry.body.imageURL || "";
 			if (media != "") {
