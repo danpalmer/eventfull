@@ -66,8 +66,10 @@ function runServer(exchange, queue) {
 	app.get('/data/:id', function (req, res) {
 		res.header('Content-Type', 'application/json');
 		redis.lrange('events:1:stream', 0, -1, function (err, data) {
-			console.log(data);
-			res.end(data);
+			for (var obj in data) {
+				res.send(obj);
+			}
+			res.end();
 		});
 	});
 
