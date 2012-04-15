@@ -1,6 +1,6 @@
 function initialize() {
 	var myOptions = {
-		zoom: 3,
+		zoom: 13,
 		center: new google.maps.LatLng(51.522396055,-0.1098203659057),
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		mapTypeControl: false,
@@ -59,12 +59,12 @@ $(function(){
 				heading = entry.body.text;
 				author = entry.body.user;
 				author_link = "http://twitter.com/"+author;
-				// location = entry.body.locationText;
+				location = entry.body.locationText;
 				if (entry.body.coordinates) {
 					lat = entry.body.coordinates.coordinates[0];
 					lng = entry.body.coordinates.coordinates[1];
 				}
-				location = "Locationings"
+				// location = "Locationings"
 				// id = entry.body.id;
 				id = "9001";
 				if (entry.mediaURL) {
