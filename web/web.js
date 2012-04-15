@@ -123,7 +123,7 @@ function runServer(exchange, queue) {
 						}
 						
 						if (data[index].picture) {
-							update.mediaURL = data[index].picture;
+							update.imageURL = data[index].picture;
 						}
 
 						if (data[index].message) {
