@@ -66,7 +66,7 @@ function render(entry) {
 	};
 }
 
-var updates = [];
+var update = [];
 
 $(function(){
 	
