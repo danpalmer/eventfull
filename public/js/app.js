@@ -43,8 +43,8 @@ function render(entry) {
 			id = entry.body.id;
 			console.log("FB COORDS DEBUG "+JSON.stringify(entry.body.coordinates));
 			if (entry.body.coordinates) {
-				lat = entry.body.coordinates['lat'];
-				lng = entry.body.coordinates['long'];
+				lat = entry.body.coordinates.lat;
+				lng = entry.body.coordinates.long;
 				console.log("Lat: "+lat+", Long: "+lng);
 			}
 			media = entry.body.imageURL || "";
@@ -74,7 +74,7 @@ $(function(){
 	script.type = 'text/javascript';
 	script.src = 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize';
 	document.body.appendChild(script);
-	
+
 	function render_loop(data){
 		for (var i=data.length-1; i >= 0; i--) {
 			single = $.parseJSON(data[i]);
