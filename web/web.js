@@ -41,7 +41,7 @@ function runServer(exchange, queue) {
 	});
 
 	app.use('/public', express.static(__dirname + '/../public/'));
-
+	app.use('/stream', express.static(__dirname + '/../stream'));
 	/// Create events in redis
 	app.post('/create', function (req, res) {
 		console.log(req.query);
@@ -191,6 +191,10 @@ function runServer(exchange, queue) {
 
 	});
 
+	app.get('/foursquare', function (req, res) {
+		res.sendfile(__dirname + '/foursquare.html');
+	});
+	
 	var port = process.env.PORT || 3001;
 	app.listen(port, function() {
 	  console.log("Listening on " + port);
