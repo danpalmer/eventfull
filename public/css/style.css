@@ -36,3 +36,8 @@ header {
   background: #ddd;
   padding: 20px;
   margin: 10px auto; }
+  
+#slider {
+  width: 80%; 
+  height: 20px;  }
+

@@ -82,11 +82,11 @@ $(function(){
 		if (lat && lng) {
 			console.log("LOCATION BONER");
 			var marker = new google.maps.Marker({
-			            position: new google.maps.LatLng(lng,lat),
-			            map: map,
-			            animation: google.maps.Animation.DROP,
-			            title: heading
-			        });
+				position: new google.maps.LatLng(lng,lat),
+				map: map,
+				animation: google.maps.Animation.DROP,
+				title: heading
+			});
 		};
 		
 		
