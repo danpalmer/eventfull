@@ -110,8 +110,8 @@ function runServer(exchange, queue) {
 					if (data[index].updated_time == time) {
 						var update = {};
 						update.id = data[index].id;
-						update.user = data[index].from.name;
-						update.username = user;
+						update.user = user;
+						update.username = data[index].from.name;
 						update.timestamp = moment(time).format('ddd MMM DD HH:mm:ss Z YYYY');
 						update.service = 'facebook';
 						
