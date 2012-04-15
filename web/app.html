@@ -8,11 +8,15 @@
 		<script src="../public/js/jquery-1.7.2.min.js"></script>
 		<script src="../public/js/app.js"></script>
 		<script src="http://js.pusher.com/1.11/pusher.min.js"></script>
+		<script src="../public/js/timeline.js"></script>
 	</head>
 	<body>
 		<header>
 			<h1>Eventfull</h1>
-			<h2>London Real Time</h2>
+			<h2 id="eventNameDate">London Real Time | April 13th - April 15th</h2>
+			<form>
+			April 13: <input class="slider" type="range" min="0" max="1000" step="1" value="0" id="slider" onchange="changeBackground()" /> April 15th
+			</form>
 		</header>
 		<section class="map">
 			<div id="map"></div>
