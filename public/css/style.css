@@ -48,3 +48,12 @@ footer {
   padding: 20px;
   margin: 10px auto;
   width: 60%; }
+  #stream article img.service {
+    width: 32px;
+    height: 32px;
+    float: left; }
+  #stream article h1 {
+    display: inline-block;
+    font-family: georgia,serif;
+    font-style: italic;
+    font-size: 25px; }
