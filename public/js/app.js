@@ -69,12 +69,6 @@ function render(entry) {
 var update = [];
 
 $(function(){
-	
-	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.src = 'http://maps.googleapis.com/maps/api/js?sensor=false&callback=initialize';
-	document.body.appendChild(script);
-
 	function render_loop(data){
 		for (var i=data.length-1; i >= 0; i--) {
 			single = $.parseJSON(data[i]);
