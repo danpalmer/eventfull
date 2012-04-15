@@ -200,7 +200,9 @@ function runServer(exchange, queue) {
 		console.log(JSON.stringify(req.body));
 
 		var foursquare = req.body.checkin;
-
+		console.log(foursquare);
+		console.log(JSON.stringify(foursquare));
+		
 		var checkin = {};
 		checkin.id = foursquare.id
 		checkin.user = foursquare.user.firstName + " " + foursquare.user.lastName;
