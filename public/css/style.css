@@ -23,7 +23,8 @@ header {
     font-weight: 100;
     color: #59e;
     text-shadow: -2px 0 0 black;
-    border-right: 2px dashed rgba(0, 0, 0, 0.5); }
+    border-right: 2px dashed rgba(0, 0, 0, 0.5);
+    margin-left: 20%; }
 
 footer {
   position: fixed;
@@ -45,4 +46,5 @@ footer {
 #stream article {
   background: #ddd;
   padding: 20px;
-  margin: 10px auto; }
+  margin: 10px auto;
+  width: 60%; }
