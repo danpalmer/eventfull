@@ -191,10 +191,35 @@ function runServer(exchange, queue) {
 
 	});
 
-	app.get('/foursquare', function (req, res) {
-		res.sendfile(__dirname + '/foursquare.html');
-	});
+	// app.get('/foursquare', function (req, res) {
+	// 	res.sendfile(__dirname + '/foursquare.html');
+	// });
 	
+	app.post('/foursquare', function (req, res) {
+		var checkin = {};
+		checkin.id = req.body.id
+		checkin.user = req.body.user.firstName + " " + req.body.user.lastName;
+		checkin.username = req.body.user.firstName + " " + req.body.user.lastName;
+		checkin.timestamp = req.body.createdAt;
+		checkin.service = 'foursquare';
+		
+		if (data[index].place) {
+			update.place = data[index].place.name;
+			update.coordinates = {
+				'lat':data[index].place.location.latitude,
+				'long':data[index].place.location.longitude
+			};
+		}
+		checkin.place = req.body.venue.name;
+		checkin.coordinates = {
+			'lat':req.body.venue.location.lat,
+			'long':req.body.venue.location.lng
+		};
+
+		checkin.text = checkin.user + " checked in at " + checkin.place + " on Foursquare.";
+		exchange.publish(queue.name, {body: checkin});
+	});
+
 	var port = process.env.PORT || 3001;
 	app.listen(port, function() {
 	  console.log("Listening on " + port);
