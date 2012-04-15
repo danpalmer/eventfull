@@ -56,6 +56,7 @@ $(function(){
 				if (entry.body.coordinates) {
 					lat = entry.body.coordinates['lat'];
 					lng = entry.body.coordinates['long'];
+					console.log("Lat: "+lat+", Long: "+lng);
 				}
 				media = entry.body.imageURL || "";
 				if (media != "") {

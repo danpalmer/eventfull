@@ -41,7 +41,7 @@ function runServer(exchange, queue) {
 	});
 
 	app.use('/public', express.static(__dirname + '/../public/'));
-	app.use('/stream', express.static(__dirname + '/stream'));
+	app.use('/stream', express.static(__dirname + '/../stream'));
 	/// Create events in redis
 	app.post('/create', function (req, res) {
 		console.log(req.query);
@@ -112,7 +112,7 @@ function runServer(exchange, queue) {
 						update.id = data[index].id;
 						update.user = user;
 						update.username = data[index].from.name;
-						update.timestamp = moment(time).format('ddd MMM DD HH:mm:ss Z YYYY');
+						update.timestamp = moment(time).format("ddd MMM DD HH:mm:ss Z YYYY");
 						update.service = 'facebook';
 						
 						if (data[index].place) {
