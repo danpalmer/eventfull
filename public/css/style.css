@@ -84,3 +84,11 @@ footer {
     display: inline; }
   #stream article p.location {
     margin-left: 10px; }
+
+.intro {
+  width: 60%;
+  margin: auto; }
+  .intro p {
+    font-size: 30px; }
+  .intro h3 {
+    font-size: 18px; }
