@@ -66,7 +66,6 @@ function runServer(exchange, queue) {
 	app.get('/data/:id', function (req, res) {
 		res.header('Content-Type', 'application/json');
 		redis.lrange('events:1:stream', 0, -1, function (err, data) {
-			console.log(data);
 			res.end(JSON.stringify(data));
 		});
 	});
@@ -109,21 +108,32 @@ function runServer(exchange, queue) {
 			  var data = JSON.parse(buffer.join('')).data;
 				for (var index in data) {
 					if (data[index].updated_time == time) {
+						var update = {};
+						update.user = user;
+						update.username = user;
+						update.timestamp = moment(time).format('ddd MMM DD HH:mm:ss Z YYYY');
+						update.service = 'facebook';
+						
 						if (data[index].place) {
-							var update = {};
-							update.user = user;
-							update.username = user;
-
-							update.timestamp = moment(time).format('ddd MMM DD HH:mm:ss Z YYYY');
-							
 							update.place = data[index].name;
-							update.service = 'facebook';
 							update.coordinates = {
 								'lat':data[index].place.location.latitude,
 								'long':data[index].place.location.longitude
 							};
+						}
+						
+						if (data[index].picture) {
+							update.mediaURL = data[index].picture;
+						}
+
+						if (data[index].message) {
+							update.text = data[index].message;
+						}
+
+						if (data[index].place || data[index].picture || data[index].message) {
 							exchange.publish(queue.name, {body: JSON.stringify(update)});
 						}
+
 					}
 				}
 				response.send("");
